@@ -30,14 +30,15 @@ public class Wizard : MonoBehaviour
 
     public int maxMana = 100;
     public int maxHp = 100;
+    public int damage = 10;
     private int _hp;
     private int[] _mana = new int[3];
     public GameObject manaBarsContainer;
     public GameObject hpBar;
     public GameObject damageUIContainer;
     public GameObject damagePrefab;
-    
-    
+    private Coroutine _damageCoroutine;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -53,6 +54,7 @@ public class Wizard : MonoBehaviour
         }
         _hp = maxHp;
         hpBar.GetComponent<Slider>().value = (float)_hp / maxHp;
+        _damageCoroutine = StartCoroutine(DamageThread());
     }
 
     // Update is called once per frame
@@ -77,5 +79,15 @@ public class Wizard : MonoBehaviour
         _mana[manaIndex] = Math.Min(_mana[manaIndex] + count, maxMana);
         GameObject manaBar = manaBarsContainer.transform.GetChild(manaIndex).gameObject;
         manaBar.GetComponent<Slider>().value = (float)_mana[manaIndex] / maxMana;
+    }
+    
+    private IEnumerator DamageThread()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(2f);
+            GetComponent<Animator>().SetTrigger("Attack");
+            GameObject.FindWithTag("Enemy").GetComponent<Enemy>().TakeDamage(damage);
+        }
     }
 }

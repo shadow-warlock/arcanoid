@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -35,6 +36,17 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(cooldown);
             GetComponent<Animator>().SetTrigger("Attack");
             wizard.GetComponent<Wizard>().TakeDamage(damage);
+        }
+    }
+    
+    public void TakeDamage(int damage)
+    {
+        _hp = Math.Max(0, _hp - damage);
+        hpBar.GetComponent<Slider>().value = (float)_hp / maxHp;
+        if (_hp == 0)
+        {
+            transform.SetParent(null);
+            Destroy(gameObject);
         }
     }
 }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5765881535681350091}
   m_Layer: 0
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wizard: {fileID: 0}
-  hpBarPrefab: {fileID: 5386706619813383998, guid: 0eaad41fc10d915479b6218568bdeccf, type: 3}
+  hpBar: {fileID: 0}
   cooldown: 5
-  hp: 45
+  maxHp: 45
   damage: 5
