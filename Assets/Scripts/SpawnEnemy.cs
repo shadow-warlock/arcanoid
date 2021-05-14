@@ -6,6 +6,7 @@ public class SpawnEnemy : MonoBehaviour
 {
 
     public GameObject enemyPrefab;
+    public GameObject enemyHpBar;
     public GameObject wizard;
     
     // Start is called before the first frame update
@@ -23,6 +24,7 @@ public class SpawnEnemy : MonoBehaviour
             enemy.transform.SetParent(transform);
             enemy.transform.Rotate(0, 180, 0);
             enemy.GetComponent<Enemy>().wizard = wizard;
+            enemy.GetComponent<Enemy>().hpBar = enemyHpBar;
         }
     }
 }

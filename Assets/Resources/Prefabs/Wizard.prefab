@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2322555634760218428}
   m_Layer: 0
   m_Name: Wizard
-  m_TagString: Untagged
+  m_TagString: Wizard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMana: 100
+  maxHp: 100
   manaBarsContainer: {fileID: 0}
+  hpBar: {fileID: 0}
 --- !u!95 &2322555634760218428
 Animator:
   serializedVersion: 3

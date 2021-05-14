@@ -34,6 +34,8 @@ public class Wizard : MonoBehaviour
     private int[] _mana = new int[3];
     public GameObject manaBarsContainer;
     public GameObject hpBar;
+    public GameObject damageUIContainer;
+    public GameObject damagePrefab;
     
     
     // Start is called before the first frame update
@@ -61,6 +63,10 @@ public class Wizard : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        GameObject damageUI = Instantiate(damagePrefab, damageUIContainer.transform.position, Quaternion.identity);
+        damageUI.transform.SetParent(damageUIContainer.transform);
+        damageUI.transform.localScale = new Vector3(1, 1, 1);
+        damageUI.GetComponent<Text>().text = damage.ToString();
         _hp = Math.Max(0, _hp - damage);
         hpBar.GetComponent<Slider>().value = (float)_hp / maxHp;
     }

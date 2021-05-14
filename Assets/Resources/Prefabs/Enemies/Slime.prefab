@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wizard: {fileID: 0}
+  hpBarPrefab: {fileID: 5386706619813383998, guid: 0eaad41fc10d915479b6218568bdeccf, type: 3}
   cooldown: 5
   hp: 45
   damage: 5
