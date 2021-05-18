@@ -32,11 +32,13 @@ public class Wizard : MonoBehaviour
     public int maxHp = 100;
     public int damage = 10;
     private int _hp;
+    private int _coins = 0;
     private int[] _mana = new int[3];
     public GameObject manaBarsContainer;
     public GameObject hpBar;
     public GameObject damageUIContainer;
     public GameObject damagePrefab;
+    public GameObject coinIndicator;
     private Coroutine _damageCoroutine;
 
     // Start is called before the first frame update
@@ -50,17 +52,18 @@ public class Wizard : MonoBehaviour
         for (int i = 0; i < manaBarsContainer.transform.childCount; i++)
         {
             GameObject manaBar = manaBarsContainer.transform.GetChild(i).gameObject;
-            manaBar.GetComponent<Slider>().value = (float)_mana[i] / maxMana;
+            manaBar.GetComponent<Slider>().value = (float) _mana[i] / maxMana;
         }
+
         _hp = maxHp;
-        hpBar.GetComponent<Slider>().value = (float)_hp / maxHp;
+        hpBar.GetComponent<Slider>().value = (float) _hp / maxHp;
         _damageCoroutine = StartCoroutine(DamageThread());
+        coinIndicator.GetComponent<Text>().text = _coins.ToString();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        
     }
 
     public void TakeDamage(int damage)
@@ -70,7 +73,7 @@ public class Wizard : MonoBehaviour
         damageUI.transform.localScale = new Vector3(1, 1, 1);
         damageUI.GetComponent<Text>().text = damage.ToString();
         _hp = Math.Max(0, _hp - damage);
-        hpBar.GetComponent<Slider>().value = (float)_hp / maxHp;
+        hpBar.GetComponent<Slider>().value = (float) _hp / maxHp;
     }
 
     public void AddMana(ManaType type, int count)
@@ -78,16 +81,32 @@ public class Wizard : MonoBehaviour
         int manaIndex = (int) type;
         _mana[manaIndex] = Math.Min(_mana[manaIndex] + count, maxMana);
         GameObject manaBar = manaBarsContainer.transform.GetChild(manaIndex).gameObject;
-        manaBar.GetComponent<Slider>().value = (float)_mana[manaIndex] / maxMana;
+        manaBar.GetComponent<Slider>().value = (float) _mana[manaIndex] / maxMana;
     }
-    
+
     private IEnumerator DamageThread()
     {
         while (true)
         {
             yield return new WaitForSeconds(2f);
-            GetComponent<Animator>().SetTrigger("Attack");
-            GameObject.FindWithTag("Enemy").GetComponent<Enemy>().TakeDamage(damage);
+            GameObject enemy = GameObject.FindWithTag("Enemy");
+            if (enemy != null)
+            {
+                Animator animator = GetComponent<Animator>();
+                animator.SetTrigger("Attack");
+                yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length / 2);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("Coin"))
+        {
+            _coins++;
+            coinIndicator.GetComponent<Text>().text = _coins.ToString();
+            Destroy(collider.gameObject);
         }
     }
 }
