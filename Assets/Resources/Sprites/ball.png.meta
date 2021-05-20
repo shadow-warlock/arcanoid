@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: d9a81ac9523313f418892c55c6fbff7f
+guid: 004e1b22a3fee4d4f88b0a0c223b9af5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1286381973434897440
-    second: blebik_move_0
+      213: -3919779002189068522
+    second: Ball_0
   - first:
-      213: -5281425141088380194
-    second: blebik_move_1
+      213: -7165607403067095034
+    second: Ball_1
   - first:
-      213: -1469001866322735317
-    second: blebik_move_2
+      213: -8356673873878969867
+    second: Ball_2
   - first:
-      213: 2966961403430589536
-    second: blebik_move_3
+      213: 6780432118162690794
+    second: Ball_3
   - first:
-      213: -8482129731642194003
-    second: blebik_move_4
+      213: -8171976943531403563
+    second: Ball_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -80,7 +80,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -92,7 +92,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -104,7 +104,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -118,7 +118,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blebik_move_0
+      name: Ball_0
       rect:
         serializedVersion: 2
         x: 0
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0eb62f3296ad52ee0800000000000000
-      internalID: -1286381973434897440
+      spriteID: 6174c70f3c52a99c0800000000000000
+      internalID: -3919779002189068522
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blebik_move_1
+      name: Ball_1
       rect:
         serializedVersion: 2
         x: 32
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eda1c9df0db94b6b0800000000000000
-      internalID: -5281425141088380194
+      spriteID: 608c64c2806ae8c90800000000000000
+      internalID: -7165607403067095034
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blebik_move_2
+      name: Ball_2
       rect:
         serializedVersion: 2
         x: 64
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2f827fe59e0d9be0800000000000000
-      internalID: -1469001866322735317
+      spriteID: 5f118a32361270c80800000000000000
+      internalID: -8356673873878969867
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blebik_move_3
+      name: Ball_3
       rect:
         serializedVersion: 2
         x: 0
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06456c14da3cc2920800000000000000
-      internalID: 2966961403430589536
+      spriteID: ae29cb2561fe81e50800000000000000
+      internalID: 6780432118162690794
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blebik_move_4
+      name: Ball_4
       rect:
         serializedVersion: 2
         x: 32
@@ -216,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da700b603fb694a80800000000000000
-      internalID: -8482129731642194003
+      spriteID: 5d6d020544e479e80800000000000000
+      internalID: -8171976943531403563
       vertices: []
       indices: 
       edges: []

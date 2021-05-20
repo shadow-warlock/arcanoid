@@ -16,8 +16,8 @@ public class BlockSpawner : MonoBehaviour
     {
         if (transform.childCount != 0 && transform.GetChild(0).childCount == 0)
         {
-            transform.GetChild(0).SetParent(null);
             Destroy(transform.GetChild(0).gameObject);
+            transform.GetChild(0).SetParent(null);
         }
 
         if (transform.childCount == 0)

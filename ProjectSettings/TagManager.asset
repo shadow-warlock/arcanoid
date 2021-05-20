@@ -16,6 +16,7 @@ TagManager:
   - Enemy
   - CoinContainer
   - Coin
+  - CastContainer
   layers:
   - Default
   - TransparentFX

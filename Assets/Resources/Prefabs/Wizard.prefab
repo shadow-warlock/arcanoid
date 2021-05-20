@@ -98,13 +98,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1067b2d6779dd3b4c85c6090500a93bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldown: 2
+  hpBar: {fileID: 0}
+  maxHp: 100
+  damage: 10
+  damageUIContainer: {fileID: 0}
+  damagePrefab: {fileID: 0}
   maxMana: 100
   maxHp: 100
   damage: 10
   manaBarsContainer: {fileID: 0}
-  hpBar: {fileID: 0}
-  damageUIContainer: {fileID: 0}
-  damagePrefab: {fileID: 0}
+  coinIndicator: {fileID: 0}
+  castContainer: {fileID: 0}
 --- !u!95 &2322555634760218428
 Animator:
   serializedVersion: 3

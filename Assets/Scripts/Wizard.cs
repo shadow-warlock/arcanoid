@@ -2,17 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Wizard : MonoBehaviour
+public class Wizard : Unit
 {
     public enum ManaType
     {
-        Purple = 0,
+        Purple = 2,
         Turquoise = 1,
-        Blue = 2
+        Blue = 0
     }
 
+    
     public static Color GetColor(ManaType type)
     {
         switch (type)
@@ -29,76 +31,67 @@ public class Wizard : MonoBehaviour
     }
 
     public int maxMana = 100;
-    public int maxHp = 100;
-    public int damage = 10;
-    private int _hp;
     private int _coins = 0;
-    private int[] _mana = new int[3];
+    private int[] _mana = new int[3]{0,0,0};
+    public Ability[] abilities;
     public GameObject manaBarsContainer;
-    public GameObject hpBar;
-    public GameObject damageUIContainer;
-    public GameObject damagePrefab;
     public GameObject coinIndicator;
-    private Coroutine _damageCoroutine;
+    public GameObject castContainer;
+    
 
     // Start is called before the first frame update
-    private void Start()
+    protected void Start()
     {
+        base.Start();
+        
         for (int i = 0; i < _mana.Length; i++)
         {
-            _mana[i] = 0;
+            UpdateManaUI(i);
         }
 
-        for (int i = 0; i < manaBarsContainer.transform.childCount; i++)
-        {
-            GameObject manaBar = manaBarsContainer.transform.GetChild(i).gameObject;
-            manaBar.GetComponent<Slider>().value = (float) _mana[i] / maxMana;
-        }
-
-        _hp = maxHp;
-        hpBar.GetComponent<Slider>().value = (float) _hp / maxHp;
-        _damageCoroutine = StartCoroutine(DamageThread());
         coinIndicator.GetComponent<Text>().text = _coins.ToString();
     }
+    
 
-    // Update is called once per frame
-    private void Update()
+    private void UpdateManaUI(int index)
     {
-    }
-
-    public void TakeDamage(int damage)
-    {
-        GameObject damageUI = Instantiate(damagePrefab, damageUIContainer.transform.position, Quaternion.identity);
-        damageUI.transform.SetParent(damageUIContainer.transform);
-        damageUI.transform.localScale = new Vector3(1, 1, 1);
-        damageUI.GetComponent<Text>().text = damage.ToString();
-        _hp = Math.Max(0, _hp - damage);
-        hpBar.GetComponent<Slider>().value = (float) _hp / maxHp;
+        GameObject manaBar = manaBarsContainer.transform.GetChild(index).gameObject;
+        manaBar.GetComponent<Slider>().value = (float) _mana[index] / maxMana;
+        castContainer.transform.GetChild(index).GetComponent<Button>().interactable = _mana[index] >= abilities[index].ManaCost;
     }
 
     public void AddMana(ManaType type, int count)
     {
         int manaIndex = (int) type;
         _mana[manaIndex] = Math.Min(_mana[manaIndex] + count, maxMana);
-        GameObject manaBar = manaBarsContainer.transform.GetChild(manaIndex).gameObject;
-        manaBar.GetComponent<Slider>().value = (float) _mana[manaIndex] / maxMana;
+        UpdateManaUI(manaIndex);
+    }
+    
+    public bool HasMana(ManaType type, int count)
+    {
+        int manaIndex = (int) type;
+        return _mana[manaIndex] - count >= 0;
+    }
+    
+    public void RemoveMana(ManaType type, int count)
+    {
+        int manaIndex = (int) type;
+        
+        _mana[manaIndex] = Math.Max(_mana[manaIndex] - count, 0);
+        UpdateManaUI(manaIndex);
     }
 
-    private IEnumerator DamageThread()
+    protected override IEnumerator Die()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(2f);
-            GameObject enemy = GameObject.FindWithTag("Enemy");
-            if (enemy != null)
-            {
-                Animator animator = GetComponent<Animator>();
-                animator.SetTrigger("Attack");
-                yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length / 2);
-                enemy.GetComponent<Enemy>().TakeDamage(damage);
-            }
-        }
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    protected override string GetTargetType()
+    {
+        return "Enemy";
+    }
+    
 
     private void OnTriggerStay2D(Collider2D collider)
     {
@@ -108,5 +101,10 @@ public class Wizard : MonoBehaviour
             coinIndicator.GetComponent<Text>().text = _coins.ToString();
             Destroy(collider.gameObject);
         }
+    }
+
+    public void Cast(int index)
+    {
+        UseAbility(abilities[index]);
     }
 }
