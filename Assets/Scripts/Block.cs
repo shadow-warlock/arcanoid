@@ -8,7 +8,7 @@ public class Block : MonoBehaviour
     private int _hp;
     public Texture2D texture;
     private SpriteRenderer _spriteRenderer;
-    private Sprite[] _sprites;
+    public Sprite[] sprites;
     private GameObject _wizard;
     private Wizard.ManaType _type;
     private const int TouchManaCount = 10;
@@ -22,9 +22,7 @@ public class Block : MonoBehaviour
         _hp = MAXHp;
         _wizard = GameObject.FindWithTag("Wizard");
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        string spriteSheet = AssetDatabase.GetAssetPath( texture );
-        _sprites = AssetDatabase.LoadAllAssetsAtPath( spriteSheet ).OfType<Sprite>().ToArray();
-        _spriteRenderer.sprite = _sprites[MAXHp - _hp];
+        _spriteRenderer.sprite = sprites[MAXHp - _hp];
         gameObject.GetComponent<SpriteRenderer>().color = Wizard.GetColor(_type);
     }   
 
@@ -34,7 +32,7 @@ public class Block : MonoBehaviour
         {
             collision.gameObject.GetComponent<Ball>().DamageAnimation();
             _hp--;
-            _spriteRenderer.sprite = _sprites[MAXHp - _hp];
+            _spriteRenderer.sprite = sprites[MAXHp - _hp];
             if (_hp == 0)
             {
                 _wizard.GetComponent<Wizard>().AddMana(_type, DestroyManaCount);

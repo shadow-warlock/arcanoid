@@ -123,4 +123,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
-  type: 0
+  sprites:
+  - {fileID: -1371171209494317951, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
+  - {fileID: 8928957203540318682, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
+  - {fileID: 8233677885453779831, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
+  - {fileID: 8578101596710425764, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
+  - {fileID: -6712392897141140283, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
+  - {fileID: -5601494363006303379, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
+  - {fileID: -1022850016553360957, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
