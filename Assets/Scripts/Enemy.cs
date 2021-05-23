@@ -21,4 +21,14 @@ public class Enemy : Unit
     {
         return "Wizard";
     }
+
+    protected override float GetModificator(Ability ability)
+    {
+        return 1;
+    }
+
+    protected override float GetMaxHpModificator()
+    {
+        return 1;
+    }
 }

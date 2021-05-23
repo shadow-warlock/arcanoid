@@ -8,7 +8,6 @@ TagManager:
   - LeftWall
   - RightWall
   - Ball
-  - GameOver
   - PlayerTag
   - BallContainer
   - Wizard
@@ -17,6 +16,7 @@ TagManager:
   - CoinContainer
   - Coin
   - CastContainer
+  - LevelUpPanel
   layers:
   - Default
   - TransparentFX

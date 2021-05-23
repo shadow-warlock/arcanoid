@@ -1,11 +1,15 @@
 public class Cast
 {
-    public int Cost { get; }
-    public int Damage { get; }
+    private readonly int _cost;
+    private readonly int _damage;
+
+    public int Cost => _cost;
+
+    public int Damage => _damage;
 
     public Cast(int cost, int damage)
     {
-        Cost = cost;
-        Damage = damage;
+        _cost = cost;
+        _damage = damage;
     }
 }

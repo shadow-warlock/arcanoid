@@ -19,19 +19,15 @@ public class Player : MonoBehaviour
     {
         _speed = defaultSpeed;
         DrawHP();
-        createBall();
+        CreateBall();
     }
 
     private void DrawHP()
     {
-        for (int i = 0; i < hpBar.transform.childCount; i++)
-        {
-            GameObject hpItem = hpBar.transform.GetChild(i).gameObject;
-            hpItem.SetActive(i + 1 <= hp);
-        }
+        hpBar.transform.GetChild(0).GetComponent<Text>().text = hp.ToString();
     }
 
-    private void createBall()
+    private void CreateBall()
     {
         Transform ballsStartContainer = transform.GetChild(0);
         GameObject ball = Instantiate(ballPrefab, ballsStartContainer.transform.position, Quaternion.identity);
@@ -50,8 +46,7 @@ public class Player : MonoBehaviour
         } else if (Input.GetKey(KeyCode.W) && _start)
         {
             _start = false;
-            transform.GetChild(0).GetChild(0).GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -1), ForceMode2D.Impulse);
-            transform.GetChild(0).GetChild(0).SetParent(GameObject.FindWithTag("BallContainer").transform);
+            transform.GetChild(0).GetChild(0).GetComponent<Ball>().Pulse();
         }
     }
 
@@ -66,7 +61,7 @@ public class Player : MonoBehaviour
         else
         {
             _start = true;
-            createBall();
+            CreateBall();
         }
     }
     

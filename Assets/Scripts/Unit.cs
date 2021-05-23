@@ -11,8 +11,9 @@ public abstract class Unit : MonoBehaviour
     public float cooldown = 5.0f;
     public GameObject hpBar;
     protected int _hp;
-    public int maxHp = 45;
-    public int damage = 5;
+
+    public int MAXHp => (int) (_maxHp * GetMaxHpModificator());
+
     public GameObject damageUIContainer;
     public GameObject damagePrefab;
     private Coroutine _damageCoroutine;
@@ -20,12 +21,13 @@ public abstract class Unit : MonoBehaviour
     private List<Ability> _usedAbilities = new List<Ability>();
     private bool _busy = false;
     private bool _die = false;
+    private int _maxHp = 45;
 
     // Start is called before the first frame update
     protected void Start()
     {
-        _hp = maxHp;
-        hpBar.GetComponent<Slider>().value = (float)_hp / maxHp;
+        _hp = MAXHp;
+        hpBar.GetComponent<Slider>().value = (float)_hp / MAXHp;
         _damageCoroutine = StartCoroutine(DamageThread());
     }
     
@@ -46,7 +48,7 @@ public abstract class Unit : MonoBehaviour
         if (castTarget != null && !castTarget._die)
         {
             Wizard wCaster = this as Wizard;
-            if (wCaster == null || wCaster.HasMana(ability.ManaType, ability.ManaCost))
+            if (wCaster == null || wCaster.HasMana(ability.ManaType, ability.ManaCost) )
             {
                 if (wCaster != null)
                 {
@@ -77,10 +79,10 @@ public abstract class Unit : MonoBehaviour
         switch (ability.Type)
         {
             case Ability.EffectType.Heal:
-                castTarget.TakeHeal(ability.Power);
+                castTarget.TakeHeal((int) (ability.Power * GetModificator(ability)));
                 break;
             case Ability.EffectType.Damage:
-                castTarget.TakeDamage(ability.Power);
+                castTarget.TakeDamage((int) (ability.Power * GetModificator(ability)));
                 break;
         }
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length * (1-ability.DamageTime));
@@ -112,6 +114,8 @@ public abstract class Unit : MonoBehaviour
 
     protected abstract IEnumerator Die();
     protected abstract String GetTargetType();
+    protected abstract float GetModificator(Ability ability);
+    protected abstract float GetMaxHpModificator();
     
     public void TakeDamage(int damage)
     {
@@ -124,7 +128,7 @@ public abstract class Unit : MonoBehaviour
         damageUI.transform.localScale = new Vector3(1, 1, 1);
         damageUI.GetComponent<Text>().text = damage.ToString();
         _hp = Math.Max(0, _hp - damage);
-        hpBar.GetComponent<Slider>().value = (float)_hp / maxHp;
+        hpBar.GetComponent<Slider>().value = (float)_hp / MAXHp;
         if (_hp == 0)
         {
             _die = true;
@@ -143,8 +147,8 @@ public abstract class Unit : MonoBehaviour
         damageUI.transform.localScale = new Vector3(1, 1, 1);
         damageUI.GetComponent<Text>().text = heal.ToString();
         damageUI.GetComponent<Text>().color = new Color(0.25f, 1f, 0.24f);
-        _hp = Math.Min(maxHp, _hp + heal);
-        hpBar.GetComponent<Slider>().value = (float)_hp / maxHp;
+        _hp = Math.Min(MAXHp, _hp + heal);
+        hpBar.GetComponent<Slider>().value = (float)_hp / MAXHp;
     }
 
 

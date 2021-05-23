@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   power: 10
-  icon: {fileID: 21300000, guid: 5b6e0928a38d0004cb10212e17dc49ff, type: 3}
+  icon: {fileID: 21300000, guid: 37119f87b3fb4ed4481a025047143875, type: 3}
   manaCost: 20
   manaType: 1
   target: 0
