@@ -12,11 +12,12 @@ public class Player : MonoBehaviour
     public GameObject hpBar;
     public int hp;
     public GameObject ballPrefab;
-    
+    private GameObject _gameController;
 
     // Start is called before the first frame update
     void Start()
     {
+        _gameController = GameObject.FindWithTag("GameController");
         _speed = defaultSpeed;
         DrawHP();
         CreateBall();
@@ -56,7 +57,7 @@ public class Player : MonoBehaviour
         DrawHP();
         if (hp <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            _gameController.GetComponent<GameController>().GameOver("Закончились светлячки");
         }
         else
         {

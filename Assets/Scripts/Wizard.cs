@@ -47,6 +47,7 @@ public class Wizard : Unit
     public GameObject castContainer;
     public GameObject levelContainer;
     public GameObject levelUpPanel;
+    private GameObject _gameController;
     private int[] _maxMana = new int[3] {100, 100, 100};
 
 
@@ -59,6 +60,7 @@ public class Wizard : Unit
         {
             UpdateManaUI(i);
         }
+        _gameController = GameObject.FindWithTag("GameController");
         coinIndicator.GetComponent<Text>().text = _coins.ToString();
     }
     
@@ -99,7 +101,7 @@ public class Wizard : Unit
     protected override IEnumerator Die()
     {
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        _gameController.GetComponent<GameController>().GameOver("Персонаж погиб");
     }
 
     protected override string GetTargetType()
