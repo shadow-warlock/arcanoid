@@ -17,6 +17,7 @@ TagManager:
   - Coin
   - CastContainer
   - LevelUpPanel
+  - Summon
   layers:
   - Default
   - TransparentFX

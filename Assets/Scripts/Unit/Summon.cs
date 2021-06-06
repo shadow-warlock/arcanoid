@@ -5,15 +5,14 @@ using UnityEngine.UI;
 
 namespace Unit
 {
-    public class Enemy : Unit
+    public class Summon : Unit
     {
-        private int Coins => (int) (3 * (1 + 0.05f * Level));
         public int Level { get; set; } = 1;
+        public Wizard owner { get; set; }
         
         protected new void Start()
         {
             base.Start();
-            GetComponent<SpriteRenderer>().color = ((EnemyData)data).Color;
             statusPanel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = Level.ToString();
         }
 
@@ -21,18 +20,13 @@ namespace Unit
         {
             Animator animator = GetComponent<Animator>();
             animator.SetTrigger("Die");
-            transform.parent.GetComponent<SpawnEnemy>().SpawnCoins(Coins);
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             Delete();
         }
 
         protected override string GetTargetType(bool summonExist)
         {
-            if (summonExist)
-            {
-                return Random.Range(1, 100) > 50 ? "Wizard" : "Summon";
-            }
-            return "Wizard";
+            return "Enemy";
         }
 
         protected override float GetModificator(Ability.Ability ability)
@@ -54,5 +48,6 @@ namespace Unit
         {
         
         }
+        
     }
 }
