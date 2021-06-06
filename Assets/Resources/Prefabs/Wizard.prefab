@@ -98,18 +98,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1067b2d6779dd3b4c85c6090500a93bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 2
-  hpBar: {fileID: 0}
-  maxHp: 100
-  damage: 10
-  damageUIContainer: {fileID: 0}
-  damagePrefab: {fileID: 0}
-  defaultAttack: {fileID: 0}
-  maxMana: 100
-  abilities: []
+  data: {fileID: 11400000, guid: 8a5b915637b23da42b7f62d16435edfb, type: 2}
+  damagePrefab: {fileID: 2304296611132575863, guid: 4a221b6f0c550164b959e0e3ce82ab61, type: 3}
+  statusPanel: {fileID: 0}
+  statusPrefab: {fileID: 2611280896085733348, guid: f9d49bccbeb12fc408372504503578eb, type: 3}
+  defaultStatuses: []
+  abilities:
+  - {fileID: 11400000, guid: ff261b3d49cf9f14da7db83a44f4a18c, type: 2}
+  - {fileID: 11400000, guid: 3f13d4af912bc2c418ca70a90096d12c, type: 2}
+  - {fileID: 11400000, guid: 0a95b4fef68c8294894889bb5aca685b, type: 2}
   manaBarsContainer: {fileID: 0}
   coinIndicator: {fileID: 0}
   castContainer: {fileID: 0}
+  expContainer: {fileID: 0}
+  levelUpPanel: {fileID: 0}
+  levelUpButton: {fileID: 0}
+  summonSpawner: {fileID: 0}
+  summonStatusPanel: {fileID: 0}
 --- !u!95 &2322555634760218428
 Animator:
   serializedVersion: 3
@@ -141,12 +146,12 @@ PointEffector2D:
   m_ColliderMask:
     serializedVersion: 2
     m_Bits: 1
-  m_ForceMagnitude: -50
+  m_ForceMagnitude: -10
   m_ForceVariation: 0
   m_DistanceScale: 100
   m_ForceSource: 0
   m_ForceTarget: 0
-  m_ForceMode: 0
+  m_ForceMode: 1
   m_Drag: 0
   m_AngularDrag: 0
 --- !u!61 &8652697651415866721
@@ -162,7 +167,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.23954901}
+  m_Offset: {x: 0.08255329, y: 0.23667417}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -173,5 +178,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.34, y: 0.48338228}
+  m_Size: {x: 0.1748934, y: 0.4791316}
   m_EdgeRadius: 0

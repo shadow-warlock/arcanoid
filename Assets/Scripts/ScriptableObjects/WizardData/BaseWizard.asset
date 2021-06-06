@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a60513d02f4dd99fc2b6e5ba812e9d, type: 3}
+  m_Name: BaseWizard
+  m_EditorClassIdentifier: 
+  maxHp: 700
+  abilities:
+  - {fileID: 11400000, guid: fbe6c37d29fccd3428a776ebd0139531, type: 2}
+  prefab: {fileID: 7502822388449489342, guid: 28f3a5cf1bd1b9147ab0088825879b75, type: 3}
+  maxMana: 640000006400000064000000

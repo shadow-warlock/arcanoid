@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfb449b42ac4051831b86beb45cc99f, type: 3}
+  m_Name: PhoenixRevival
+  m_EditorClassIdentifier: 
+  type: 2
+  power: 0
+  target: 1
+  trigger: Revival
+  damageTime: 0.8
+  targetStatuses:
+  - {fileID: 11400000, guid: 69b2ccb304526934eb26c8a5600e658e, type: 2}
+  casterStatuses:
+  - {fileID: 11400000, guid: 2982d08c243ef6f44a9ceba6ab2a1e1c, type: 2}

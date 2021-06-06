@@ -115,11 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f490318279550e40ab4c53fff91169c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 3
   hpBar: {fileID: 0}
-  maxHp: 45
-  damage: 10
+  data: {fileID: 0}
   damageUIContainer: {fileID: 0}
   damagePrefab: {fileID: 0}
-  defaultAttack: {fileID: 11400000, guid: 7d4c30d9dc09f964ba66800764f19e8d, type: 2}
-  coins: 3
+  levelText: {fileID: 0}

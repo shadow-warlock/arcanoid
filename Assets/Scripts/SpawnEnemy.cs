@@ -1,21 +1,19 @@
 using System.Collections;
-using System.Collections.Generic;
+using Unit;
+using UnitData;
 using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
 
-    public GameObject enemyPrefab;
-    public GameObject enemyHpBar;
-    public GameObject damageUIContainer;
+    public Level levelData;
     public GameObject damagePrefab;
     public GameObject coinPrefab;
+    public GameObject statusPanel;
+    public GameObject statusPrefab;
     private bool _spawned = false;
+    private int _iteration = 0;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     private void Update()
@@ -30,12 +28,26 @@ public class SpawnEnemy : MonoBehaviour
     private IEnumerator Spawn()
     {
         yield return new WaitForSeconds(2f);
-        GameObject enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
-        enemy.transform.SetParent(transform);
-        enemy.transform.Rotate(0, 180, 0);
-        enemy.GetComponent<Enemy>().hpBar = enemyHpBar;
-        enemy.GetComponent<Enemy>().damagePrefab = damagePrefab;
-        enemy.GetComponent<Enemy>().damageUIContainer = damageUIContainer;
+        int iterationOnLevelList = _iteration % levelData.Enemies.Count;
+        int levelListNumber = _iteration / levelData.Enemies.Count;
+        int level = (int) (levelData.Levels[iterationOnLevelList] * (1 + levelData.MultipleLevel * levelListNumber) +
+                             levelData.IncreaseLevel * levelListNumber);
+        Spawn(levelData.Enemies[iterationOnLevelList], level);
+        _spawned = false;
+        _iteration++;
+    }
+    
+    public void Spawn(EnemyData data, int level)
+    {
+        GameObject enemyObj = Instantiate(data.Prefab, transform.position, Quaternion.identity);
+        enemyObj.transform.SetParent(transform);
+        enemyObj.transform.Rotate(0, 180, 0);
+        Enemy enemy = enemyObj.GetComponent<Enemy>();
+        enemy.Level = level;
+        enemy.damagePrefab = damagePrefab;
+        enemy.data = data;
+        enemy.statusPanel = statusPanel;
+        enemy.statusPrefab = statusPrefab;
         _spawned = false;
     }
 

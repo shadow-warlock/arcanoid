@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 8365572667551945455}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1371171209494317951, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
+  m_Sprite: {fileID: 1555695727865631640, guid: 750509758be54d240acc1695bb93fbc9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,18 +97,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08, y: -0.04}
+  m_Offset: {x: 0.00010561943, y: -0.000052809715}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 1}
-    oldSize: {x: 0.16, y: 0.08}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.16}
     newSize: {x: 0.16, y: 0.08}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.08}
+  m_Size: {x: 0.31978875, y: 0.15989438}
   m_EdgeRadius: 0
 --- !u!114 &786742431448930719
 MonoBehaviour:
@@ -122,12 +122,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47d844ceab5ba444a7df64685ef8f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture: {fileID: 2800000, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
+  texture: {fileID: 2800000, guid: 750509758be54d240acc1695bb93fbc9, type: 3}
   sprites:
-  - {fileID: -1371171209494317951, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
-  - {fileID: 8928957203540318682, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
-  - {fileID: 8233677885453779831, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
-  - {fileID: 8578101596710425764, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
-  - {fileID: -6712392897141140283, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
-  - {fileID: -5601494363006303379, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
-  - {fileID: -1022850016553360957, guid: 75b986c208bff5446adcf3e2101a2f05, type: 3}
+  - {fileID: 1555695727865631640, guid: 750509758be54d240acc1695bb93fbc9, type: 3}
+  - {fileID: 692371484494601432, guid: 750509758be54d240acc1695bb93fbc9, type: 3}
+  - {fileID: -2953765497542348887, guid: 750509758be54d240acc1695bb93fbc9, type: 3}
+  - {fileID: 8320754804572039250, guid: 750509758be54d240acc1695bb93fbc9, type: 3}
+  - {fileID: 4546272398990788079, guid: 750509758be54d240acc1695bb93fbc9, type: 3}
+  - {fileID: -1645421597784402278, guid: 750509758be54d240acc1695bb93fbc9, type: 3}
+  - {fileID: 457272312150633338, guid: 750509758be54d240acc1695bb93fbc9, type: 3}

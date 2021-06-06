@@ -8,22 +8,22 @@ public class Player : MonoBehaviour
     private float _speed;
     private bool _leftWallTouch = false;
     private bool _rightWallTouch = false;
-    private bool _start = true;
+    private bool _magnet = false;
     public GameObject hpBar;
     public int hp;
     public GameObject ballPrefab;
     private GameObject _gameController;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _gameController = GameObject.FindWithTag("GameController");
         _speed = defaultSpeed;
-        DrawHP();
+        DrawHp();
         CreateBall();
     }
 
-    private void DrawHP()
+    private void DrawHp()
     {
         hpBar.transform.GetChild(0).GetComponent<Text>().text = hp.ToString();
     }
@@ -31,8 +31,8 @@ public class Player : MonoBehaviour
     private void CreateBall()
     {
         Transform ballsStartContainer = transform.GetChild(0);
-        GameObject ball = Instantiate(ballPrefab, ballsStartContainer.transform.position, Quaternion.identity);
-        ball.transform.SetParent(ballsStartContainer.transform);
+        GameObject ball = Instantiate(ballPrefab, ballsStartContainer.position, Quaternion.identity);
+        ball.transform.SetParent(ballsStartContainer);
     }
 
     // Update is called once per frame
@@ -41,31 +41,50 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && !_leftWallTouch)
         {
             transform.Translate(Vector2.left * (_speed * Time.deltaTime));
-        } else if (Input.GetKey(KeyCode.D) && !_rightWallTouch)
+        }
+        else if (Input.GetKey(KeyCode.D) && !_rightWallTouch)
         {
             transform.Translate(Vector2.right * (_speed * Time.deltaTime));
-        } else if (Input.GetKey(KeyCode.W) && _start)
+        }
+        else if (Input.GetKey(KeyCode.W))
         {
-            _start = false;
-            transform.GetChild(0).GetChild(0).GetComponent<Ball>().Pulse();
+            foreach (Transform ball in transform.GetChild(0))
+            {
+                ball.GetComponent<Ball>().Pulse();
+            }
+        }
+        else if (Input.GetKeyUp(KeyCode.Q))
+        {
+            if (_magnet)
+            {
+                _magnet = false;
+                gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+            }
+            else
+            {
+                _magnet = true;
+                gameObject.GetComponent<SpriteRenderer>().color = new Color(0.5f, 1, 1);
+            }
+
+
         }
     }
+
 
     public void TakeDamage(int damage)
     {
         hp -= damage;
-        DrawHP();
+        DrawHp();
         if (hp <= 0)
         {
             _gameController.GetComponent<GameController>().GameOver("Закончились светлячки");
         }
         else
         {
-            _start = true;
             CreateBall();
         }
     }
-    
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         bool leftCollision = collision.gameObject.CompareTag("LeftWall");
@@ -78,6 +97,12 @@ public class Player : MonoBehaviour
         if (rightCollision)
         {
             _rightWallTouch = true;
+        }
+
+        bool ballCollision = collision.gameObject.CompareTag("Ball");
+        if (ballCollision && _magnet)
+        {
+            collision.gameObject.GetComponent<Ball>().Magnet(transform.GetChild(0));
         }
     }
 

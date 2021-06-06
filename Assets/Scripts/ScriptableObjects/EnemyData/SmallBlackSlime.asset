@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d57973f586f4e1f888c74e5ad26619b, type: 3}
+  m_Name: SmallBlackSlime
+  m_EditorClassIdentifier: 
+  maxHp: 1200
+  abilities:
+  - {fileID: 11400000, guid: 7d4c30d9dc09f964ba66800764f19e8d, type: 2}
+  - {fileID: 11400000, guid: d03a21dff2065d94baaeb5dd2ed21062, type: 2}
+  prefab: {fileID: 1461079730983300411, guid: 63da3f39cc35039448732d02ad724b48, type: 3}
+  color: {r: 0, g: 0, b: 0, a: 1}
