@@ -1196,6 +1196,11 @@ MonoBehaviour:
   damagePrefab: {fileID: 2304296611132575863, guid: 4a221b6f0c550164b959e0e3ce82ab61, type: 3}
   statusPanel: {fileID: 179101188}
   statusPrefab: {fileID: 2611280896085733348, guid: f9d49bccbeb12fc408372504503578eb, type: 3}
+  manaBarsContainer: {fileID: 851084409}
+  castContainer: {fileID: 723270168}
+  coinIndicator: {fileID: 703930611}
+  expContainer: {fileID: 506280588}
+  levelUpButton: {fileID: 1655016047}
 --- !u!114 &731881170
 MonoBehaviour:
   m_ObjectHideFlags: 0
