@@ -1,5 +1,6 @@
 using System.Linq;
 using Unit;
+using UnitUI;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,8 +13,8 @@ public class Block : MonoBehaviour
     public Sprite[] sprites;
     private GameObject _wizard;
     private Wizard.ManaType _type;
-    private const int TouchManaCount = 10;
-    private const int DestroyManaCount = 30;
+    private const int TouchManaCount = 100;
+    private const int DestroyManaCount = 300;
 
 
     private void Start()
@@ -24,7 +25,7 @@ public class Block : MonoBehaviour
         _wizard = GameObject.FindWithTag("Wizard");
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = sprites[MAXHp - _hp];
-        gameObject.GetComponent<SpriteRenderer>().color = Wizard.GetColor(_type);
+        gameObject.GetComponent<SpriteRenderer>().color = WizardUIListener.GetColor(_type);
     }   
 
     private void OnCollisionEnter2D(Collision2D collision)

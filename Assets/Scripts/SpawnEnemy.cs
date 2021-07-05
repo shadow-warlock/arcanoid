@@ -1,19 +1,18 @@
+using System;
 using System.Collections;
 using Unit;
 using UnitData;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpawnEnemy : MonoBehaviour
 {
 
     public Level levelData;
-    public GameObject damagePrefab;
     public GameObject coinPrefab;
-    public GameObject statusPanel;
-    public GameObject statusPrefab;
     private bool _spawned = false;
     private int _iteration = 0;
-    
+    public Action<Enemy> OnSpawn; 
 
     // Update is called once per frame
     private void Update()
@@ -44,11 +43,9 @@ public class SpawnEnemy : MonoBehaviour
         enemyObj.transform.Rotate(0, 180, 0);
         Enemy enemy = enemyObj.GetComponent<Enemy>();
         enemy.Level = level;
-        enemy.damagePrefab = damagePrefab;
         enemy.data = data;
-        enemy.statusPanel = statusPanel;
-        enemy.statusPrefab = statusPrefab;
         _spawned = false;
+        if (OnSpawn != null) OnSpawn(enemy);
     }
 
     public void SpawnCoins(int count)

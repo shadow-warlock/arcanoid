@@ -1,27 +1,62 @@
 ﻿using System;
+using System.Collections;
+using System.Runtime.InteropServices;
 using Ability;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Status
 {
-    public class Status : MonoBehaviour
+    public class Status
     {
-        public StatusData Data { get; set; }
-        public Coroutine Coroutine { get; set; }
+        public Action OnTick;
+        public Action OnDelete;
+
+        private StatusData Data { get; }
         private int _currentTime;
-        public float Coefficient { get; set; }
-        public Ability.Ability Ability { get; set; }
-        public Unit.Unit Caster { get; set; }
-        public Unit.Unit Target { get; set; }
-        private void Start()
+        private float Coefficient { get; }
+        private Unit.Unit Caster { get; }
+        private Unit.Unit Target { get; }
+
+        
+        public Status(StatusData data, Unit.Unit caster, Unit.Unit target, float coefficient)
         {
+            Data = data;
+            Caster = caster;
+            Target = target;
+            Coefficient = coefficient;
             _currentTime = 1;
-            GetComponent<Image>().sprite = Data.Icon;
         }
 
-        public void Tick()
+        public IEnumerator Work()
+        {
+            while (!IsEnd())
+            {
+                float waitTickSize = 0;
+                while (!IsEnd() && waitTickSize < TickSize)
+                {
+                    waitTickSize += 0.05f;
+                    yield return new WaitForSeconds(0.05f);
+
+                }
+                Tick();
+            }
+            Delete();
+        }
+
+        public void TickHandler()
+        {
+            if (!IsEnd())
+            {
+                Tick();
+            }
+            if (IsEnd())
+            {
+                Delete();
+            }
+        }
+
+        private void Tick()
         {
             switch (Type)
             {
@@ -47,17 +82,21 @@ namespace Status
                     throw new ArgumentOutOfRangeException();
             }
             _currentTime++;
-            GetComponent<Image>().fillAmount = 1.0f - (float) _currentTime / Data.Time;
+            if (OnTick != null) OnTick();
         }
 
-        public void Delete()
+        public void Stop()
         {
-            StopCoroutine(Coroutine);
-            transform.SetParent(null);
-            Destroy(gameObject);
+            if (OnDelete != null) OnDelete();
+        }
+        
+        private void Delete()
+        {
+            Target.OnStatusEnd(this);
+            if (OnDelete != null) OnDelete();
         }
 
-        public bool isEnd()
+        public bool IsEnd()
         {
             return Data.Time < _currentTime;
         }

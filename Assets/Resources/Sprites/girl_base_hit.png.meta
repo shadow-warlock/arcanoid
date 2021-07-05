@@ -118,12 +118,12 @@ TextureImporter:
       name: girl_base_hit_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 202
-        width: 34
-        height: 47
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 192
+        width: 200
+        height: 64
+      alignment: 6
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -139,12 +139,12 @@ TextureImporter:
       name: girl_base_hit_1
       rect:
         serializedVersion: 2
-        x: 5
-        y: 139
-        width: 64
-        height: 51
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 128
+        width: 200
+        height: 64
+      alignment: 6
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -160,12 +160,12 @@ TextureImporter:
       name: girl_base_hit_2
       rect:
         serializedVersion: 2
-        x: 5
-        y: 75
-        width: 49
-        height: 51
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 64
+        width: 200
+        height: 64
+      alignment: 6
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -181,12 +181,12 @@ TextureImporter:
       name: girl_base_hit_3
       rect:
         serializedVersion: 2
-        x: 5
-        y: 10
-        width: 64
-        height: 48
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 0
+        width: 200
+        height: 64
+      alignment: 6
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

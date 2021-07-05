@@ -14,7 +14,6 @@ namespace Unit
         {
             base.Start();
             GetComponent<SpriteRenderer>().color = ((EnemyData)data).Color;
-            statusPanel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = Level.ToString();
         }
 
         protected override IEnumerator Die()
@@ -26,11 +25,16 @@ namespace Unit
             Delete();
         }
 
+        public override int GetLevel()
+        {
+            return Level;
+        }
+
         protected override string GetTargetType(bool summonExist)
         {
             if (summonExist)
             {
-                return Random.Range(1, 100) > 50 ? "Wizard" : "Summon";
+                return "Summon";
             }
             return "Wizard";
         }

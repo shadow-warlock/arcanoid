@@ -1,7 +1,5 @@
 using System.Collections;
-using UnitData;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Unit
 {
@@ -13,7 +11,6 @@ namespace Unit
         protected new void Start()
         {
             base.Start();
-            statusPanel.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = Level.ToString();
         }
 
         protected override IEnumerator Die()
@@ -22,6 +19,11 @@ namespace Unit
             animator.SetTrigger("Die");
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             Delete();
+        }
+
+        public override int GetLevel()
+        {
+            return Level;
         }
 
         protected override string GetTargetType(bool summonExist)

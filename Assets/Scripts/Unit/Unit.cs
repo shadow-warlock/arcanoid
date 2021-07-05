@@ -5,23 +5,25 @@ using System.Linq;
 using Ability;
 using Status;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Unit
 {
     public abstract class Unit : MonoBehaviour
     {
-
-        private int _hp;
+        public Action OnCreate;
+        public Action OnDelete; 
+        public Action<string, bool> OnDamage;
+        public Action  OnUpdate; 
+        public Action<Status.Status>  OnAddStatus;
+        
+        public int Hp { get; private set; }
         public UnitData.UnitData data;
-        protected int MAXHp => (int) (data.MaxHp * GetMaxHpModificator());
-
-        public GameObject damagePrefab;
-        public GameObject statusPanel;
-        public GameObject statusPrefab;
+        public int MAXHp => (int) (data.MaxHp * GetMaxHpModificator());
+        
         private Queue<Ability.Ability> _usedAbilities = new Queue<Ability.Ability>();
-        private List<Status.Status> _statuses = new List<Status.Status>();
+        public List<Status.Status> Statuses { get; } = new List<Status.Status>();
+
         [SerializeField]
         private List<StatusData> defaultStatuses = new List<StatusData>(); 
         private bool _busy;
@@ -30,18 +32,19 @@ namespace Unit
         // Start is called before the first frame update
         protected void Start()
         {
-            _hp = MAXHp;
+            Hp = MAXHp;
             foreach (TimeAbility ability in data.Abilities)
             {
                 StartCoroutine(TimeAbilityThread(ability));
             }
-            UpdateHpBar();
             StartCoroutine(CastThread());
             foreach (StatusData data in defaultStatuses)
             {
                 AddStatus(data, this, 1);
             }
-            statusPanel.SetActive(true);
+
+            if (OnCreate != null) OnCreate();
+
         }
     
         private IEnumerator Cast(Ability.Ability ability)
@@ -71,7 +74,7 @@ namespace Unit
                 }
                 foreach (StatusData statusData in ability.CasterStatuses)
                 {
-                    AddStatus(statusData, castTarget, GetModificator(ability));
+                    AddStatus(statusData, this, GetModificator(ability));
                 }
                 switch (ability.Type)
                 {
@@ -90,18 +93,18 @@ namespace Unit
             _busy = false;
         }
 
-        private void AddStatus(StatusData statusData, Unit target, float coefficient)
+        // Use for status target (not caster)
+        private void AddStatus(StatusData statusData, Unit caster, float coefficient)
         {
-            Transform statusesContainer = statusPanel.transform.GetChild(2);
-            GameObject statusObj = Instantiate(statusPrefab, statusesContainer.position, Quaternion.identity, statusesContainer);
-            Status.Status status = statusObj.GetComponent<Status.Status>();
-            status.Data = statusData;
-            status.Target = target;
-            status.Caster = this;
-            status.Coefficient = coefficient;
-            _statuses.Add(status);
-            status.Coroutine = StartCoroutine(StatusThread(status));
-            DrawDamageUI(statusData.Text, true);
+            Status.Status status = new Status.Status(statusData, caster, this, coefficient);
+            Statuses.Add(status);
+            StartCoroutine(status.Work());
+            if (OnAddStatus != null) OnAddStatus(status);
+        }
+        
+        public void OnStatusEnd(Status.Status status)
+        {
+            Statuses.Remove(status);
         }
 
         protected abstract bool CanCast(Ability.Ability ability);
@@ -110,19 +113,9 @@ namespace Unit
 
         public void UseAbility(Ability.Ability ability)
         {
-                _usedAbilities.Enqueue(ability);
+            _usedAbilities.Enqueue(ability);
         }
-    
-        private IEnumerator StatusThread(Status.Status status)
-        {
-            while (!status.isEnd())
-            {
-                yield return new WaitForSeconds(status.TickSize);
-                status.Tick();
-            }
-            status.Delete();
-            _statuses.Remove(status);
-        }
+        
         private IEnumerator TimeAbilityThread(TimeAbility ability)
         {
             while (true)
@@ -143,17 +136,17 @@ namespace Unit
 
         protected float GetStatusesPower(StatusData.StatusType type)
         {
-            return _statuses.Where(status => status.Type == type).Aggregate<Status.Status, float>(1, (current, status) => current * status.Power);
+            return Statuses.Where(status => status.Type == type).Aggregate<Status.Status, float>(1, (current, status) => current * status.Power);
         }
         
         protected bool IsStatusExist(StatusData.StatusType type)
         {
-            return _statuses.Any(status => status.Type == type);
+            return Statuses.Any(status => status.Type == type);
         }
         
         protected Status.Status GetStatus(StatusData.StatusType type)
         {
-            return _statuses.Find(status => status.Type == type);
+            return Statuses.Find(status => status.Type == type);
         }
         
         private IEnumerator CastThread()
@@ -170,6 +163,7 @@ namespace Unit
         }
 
         protected abstract IEnumerator Die();
+        public abstract int GetLevel();
         protected abstract String GetTargetType(bool summonExist);
         protected abstract float GetModificator(Ability.Ability ability);
         protected abstract float GetMaxHpModificator();
@@ -180,24 +174,19 @@ namespace Unit
             {
                 return;
             }
-            DrawDamageUI(damage.ToString(), false);
-            _hp = Math.Max(0, _hp - damage);
-            UpdateHpBar();
-            if (_hp == 0)
+
+            int realDamage = Math.Min(damage, Hp);
+            Hp -= realDamage;
+            if (OnDamage != null) OnDamage(realDamage.ToString(), false);
+            if (Hp == 0)
             {
                 if (IsStatusExist(StatusData.StatusType.Revival))
                 {
-                    TakeHeal(MAXHp);
                     Status.Status status = GetStatus(StatusData.StatusType.Revival);
-                    status.Tick();
-                    if (status.isEnd())
-                    {
-                        _statuses.Remove(status);
-                    }
+                    status.TickHandler();
                     return;
                 }
                 _die = true;
-                statusPanel.SetActive(false);
                 StartCoroutine(Die());
             }
         }
@@ -208,45 +197,22 @@ namespace Unit
             {
                 return;
             }
-            DrawDamageUI(heal.ToString(), true);
-            _hp = Math.Min(MAXHp, _hp + heal);
-            UpdateHpBar();
+            int realHeal = Math.Min(MAXHp - Hp, heal);
+            Hp += realHeal;
+            if (OnDamage != null) OnDamage(realHeal.ToString(), true);
         }
+        
 
-        private void UpdateHpBar()
-        {
-            statusPanel.transform.GetChild(1).GetComponent<Slider>().value = (float)_hp / MAXHp;
-        }
-        
-        private void DrawDamageUI(String text, bool positive)
-        {
-            Transform damageUIContainer = statusPanel.transform.GetChild(3);
-            GameObject damageUI = Instantiate(damagePrefab, damageUIContainer.position, Quaternion.identity);
-            damageUI.transform.SetParent(damageUIContainer);
-            damageUI.transform.localScale = new Vector3(1, 1, 1);
-            damageUI.GetComponent<Text>().text = text;
-            if (positive)
-            {
-                damageUI.GetComponent<Text>().color = new Color(0.25f, 1f, 0.24f);
-            }
-        }
-        
         public void Delete()
         {
+            if (OnDelete != null) OnDelete();
+            foreach (Status.Status status in Statuses)
+            {
+                status.Stop();
+            }
+            Statuses.Clear();
             transform.SetParent(null);
-            statusPanel.SetActive(false);
-            foreach (Status.Status status in _statuses)
-            {
-                status.Delete();
-            }
-            _statuses.Clear();
             Destroy(gameObject);
-
-            Transform damageUIContainer = statusPanel.transform.GetChild(3);
-            for(int i=0; i < damageUIContainer.childCount; i++)
-            {
-                Destroy(damageUIContainer.GetChild(i).gameObject);
-            }
         }
 
     }

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   time: 1
-  tickSize: 0
-  icon: {fileID: 21300000, guid: f19eab17a963136418ad915c8d4a3595, type: 3}
+  tickSize: 1
+  icon: {fileID: 21300000, guid: 37119f87b3fb4ed4481a025047143875, type: 3}
   power: 200
   text: "\u0418\u0437 \u043F\u0435\u043F\u043B\u0430"
   increasePower: 1
