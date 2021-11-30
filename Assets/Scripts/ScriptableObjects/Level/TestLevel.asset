@@ -14,11 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - {fileID: 11400000, guid: fca712f3f1ddfe349b764d042186d6b5, type: 2}
-  - {fileID: 11400000, guid: c7aaabbdac3da364f85bd2b50f9f4b89, type: 2}
   - {fileID: 11400000, guid: fca712f3f1ddfe349b764d042186d6b5, type: 2}
-  - {fileID: 11400000, guid: c7aaabbdac3da364f85bd2b50f9f4b89, type: 2}
   - {fileID: 11400000, guid: fca712f3f1ddfe349b764d042186d6b5, type: 2}
-  - {fileID: 11400000, guid: b2880c858873ef14ca16efeed5e0e530, type: 2}
   levels: 010000000200000003000000040000000500000001000000
   increaseLevel: 2
   multipleLevel: 1

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Runtime.InteropServices;
 using Ability;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -39,7 +38,10 @@ namespace Status
                     yield return new WaitForSeconds(0.05f);
 
                 }
-                Tick();
+                if (!IsEnd())
+                {
+                    Tick();
+                }
             }
             Delete();
         }
@@ -73,7 +75,7 @@ namespace Status
                 case StatusData.StatusType.Disarm:
                     break;
                 case StatusData.StatusType.Revival:
-                    foreach (StatusAbility ability in Data.Abilities)
+                    foreach (AbilityData ability in Data.Abilities)
                     {
                         Target.UseAbility(ability);
                     }

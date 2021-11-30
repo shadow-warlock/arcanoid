@@ -78,7 +78,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.7, y: 0.7}
+  m_Size: {x: 0.64, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -116,8 +116,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: e32f4af1ee4fb704a90ff58ceb79e93b, type: 2}
-  damagePrefab: {fileID: 2304296611132575863, guid: 4a221b6f0c550164b959e0e3ce82ab61, type: 3}
-  statusPanel: {fileID: 0}
-  statusPrefab: {fileID: 2611280896085733348, guid: f9d49bccbeb12fc408372504503578eb, type: 3}
   defaultStatuses:
   - {fileID: 11400000, guid: 422d86a7ebe27c94a826e4123c6a0bdb, type: 2}

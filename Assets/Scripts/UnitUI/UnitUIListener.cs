@@ -68,6 +68,7 @@ namespace UnitUI
             GameObject statusObj = Instantiate(statusPrefab, statusesContainer.position, Quaternion.identity, statusesContainer);
             StatusBehavior statusUI = statusObj.GetComponent<StatusBehavior>();
             statusUI.Status = status;
+            statusUI.OnTick = OnDamage;
         }
 
 

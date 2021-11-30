@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5678894978861254723}
   - component: {fileID: 8688900375477949965}
   - component: {fileID: 2322555634760218428}
-  - component: {fileID: 4911266770619668541}
-  - component: {fileID: 8652697651415866721}
+  - component: {fileID: 6533865568688289677}
+  - component: {fileID: 5196116909948345786}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Wizard
@@ -75,12 +75,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1777750061863692337, guid: aa70853f40e3c3f4e8379216739b15f3, type: 3}
+  m_Sprite: {fileID: 6998952633109612872, guid: b360d2b84cccf91478eb8dc8c9931734, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -99,22 +99,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 8a5b915637b23da42b7f62d16435edfb, type: 2}
-  damagePrefab: {fileID: 2304296611132575863, guid: 4a221b6f0c550164b959e0e3ce82ab61, type: 3}
-  statusPanel: {fileID: 0}
-  statusPrefab: {fileID: 2611280896085733348, guid: f9d49bccbeb12fc408372504503578eb, type: 3}
   defaultStatuses: []
   abilities:
   - {fileID: 11400000, guid: ff261b3d49cf9f14da7db83a44f4a18c, type: 2}
   - {fileID: 11400000, guid: 3f13d4af912bc2c418ca70a90096d12c, type: 2}
   - {fileID: 11400000, guid: 0a95b4fef68c8294894889bb5aca685b, type: 2}
-  manaBarsContainer: {fileID: 0}
-  coinIndicator: {fileID: 0}
-  castContainer: {fileID: 0}
-  expContainer: {fileID: 0}
   levelUpPanel: {fileID: 0}
-  levelUpButton: {fileID: 0}
   summonSpawner: {fileID: 0}
-  summonStatusPanel: {fileID: 0}
 --- !u!95 &2322555634760218428
 Animator:
   serializedVersion: 3
@@ -128,33 +119,13 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 3646810430678484197e8f6d53f36861, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!250 &4911266770619668541
-PointEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7502822388449489342}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_ForceMagnitude: -10
-  m_ForceVariation: 0
-  m_DistanceScale: 100
-  m_ForceSource: 0
-  m_ForceTarget: 0
-  m_ForceMode: 1
-  m_Drag: 0
-  m_AngularDrag: 0
---- !u!61 &8652697651415866721
+--- !u!61 &6533865568688289677
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,16 +138,36 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0.21798484, y: 0.29804158}
+  m_Offset: {x: 0.32044822, y: 0.32044822}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
+    pivot: {x: -0.0007003235, y: -0.0007003099}
     oldSize: {x: 0.64, y: 0.64}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.44575647, y: 0.6018665}
+  m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
+--- !u!250 &5196116909948345786
+PointEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7502822388449489342}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceMagnitude: -10
+  m_ForceVariation: 0
+  m_DistanceScale: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
+  m_ForceMode: 0
+  m_Drag: 0
+  m_AngularDrag: 0

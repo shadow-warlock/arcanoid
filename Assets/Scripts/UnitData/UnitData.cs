@@ -10,14 +10,14 @@ namespace UnitData
         protected int maxHp;
     
         [SerializeField]
-        protected List<TimeAbility> abilities = new List<TimeAbility>();
+        protected List<TimeAbilityData> abilities = new List<TimeAbilityData>();
 
         [SerializeField] 
         protected GameObject prefab;
     
         public int MaxHp => maxHp;
     
-        public List<TimeAbility> Abilities => abilities;
+        public List<TimeAbilityData> Abilities => abilities;
 
         public GameObject Prefab => prefab;
     

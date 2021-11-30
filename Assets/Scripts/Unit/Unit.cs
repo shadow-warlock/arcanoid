@@ -5,7 +5,6 @@ using System.Linq;
 using Ability;
 using Status;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Unit
 {
@@ -21,19 +20,19 @@ namespace Unit
         public UnitData.UnitData data;
         public int MAXHp => (int) (data.MaxHp * GetMaxHpModificator());
         
-        private Queue<Ability.Ability> _usedAbilities = new Queue<Ability.Ability>();
+        private Queue<AbilityData> _usedAbilities = new Queue<AbilityData>();
         public List<Status.Status> Statuses { get; } = new List<Status.Status>();
 
         [SerializeField]
         private List<StatusData> defaultStatuses = new List<StatusData>(); 
         private bool _busy;
-        private bool _die;
+        public bool IsDie { get; private set; }
 
         // Start is called before the first frame update
         protected void Start()
         {
             Hp = MAXHp;
-            foreach (TimeAbility ability in data.Abilities)
+            foreach (TimeAbilityData ability in data.Abilities)
             {
                 StartCoroutine(TimeAbilityThread(ability));
             }
@@ -46,55 +45,38 @@ namespace Unit
             if (OnCreate != null) OnCreate();
 
         }
-    
-        private IEnumerator Cast(Ability.Ability ability)
+
+        private IEnumerator FindTarget(AbilityData abilityData, Action<Unit> callback)
         {
             Unit castTarget;
             do
             {
                 bool summonExist = GameObject.FindWithTag("Summon") != null;
-                castTarget = ability.Target switch
+                castTarget = abilityData.Target switch
                 {
-                    Ability.Ability.TargetType.Caster => this,
-                    Ability.Ability.TargetType.Enemy => GameObject.FindWithTag(GetTargetType(summonExist))?.GetComponent<Unit>(),
+                    AbilityData.TargetType.Caster => this,
+                    AbilityData.TargetType.Enemy => GameObject.FindWithTag(GetTargetType(summonExist))
+                        ?.GetComponent<Unit>(),
                     _ => null
                 };
                 yield return new WaitForSeconds(0.05f);
-            } while (castTarget == null || castTarget._die);
+            } while (castTarget == null || castTarget.IsDie);
 
-            if (CanCast(ability))
-            {
-                PreCastDoing(ability);
-                Animator animator = gameObject.GetComponent<Animator>();
-                animator.SetTrigger(ability.Trigger);
-                yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length * ability.DamageTime);
-                foreach (StatusData statusData in ability.TargetStatuses)
+            callback(castTarget);
+        }
+
+        private void Cast(AbilityData abilityData)
+        {
+            StartCoroutine(FindTarget(abilityData, (Unit target) => {
+                StartCoroutine(abilityData.Cast(gameObject.GetComponent<Animator>(), this, target, () =>
                 {
-                    castTarget.AddStatus(statusData, castTarget, GetModificator(ability));
-                }
-                foreach (StatusData statusData in ability.CasterStatuses)
-                {
-                    AddStatus(statusData, this, GetModificator(ability));
-                }
-                switch (ability.Type)
-                {
-                    case Ability.Ability.EffectType.Heal:
-                        castTarget.TakeHeal((int) (ability.Power * GetModificator(ability) * Random.Range(0.9f, 1.1f)));
-                        break;
-                    case Ability.Ability.EffectType.Damage:
-                        castTarget.TakeDamage((int) (ability.Power * GetModificator(ability) * Random.Range(0.9f, 1.1f)));
-                        break;
-                    case Ability.Ability.EffectType.Summon:
-                        ((Wizard)this).Summon((SummonAbility)ability);
-                        break;
-                }
-                yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length * (1-ability.DamageTime));
-            }
-            _busy = false;
+                    _busy = false;
+                }));
+            }));
         }
 
         // Use for status target (not caster)
-        private void AddStatus(StatusData statusData, Unit caster, float coefficient)
+        public void AddStatus(StatusData statusData, Unit caster, float coefficient)
         {
             Status.Status status = new Status.Status(statusData, caster, this, coefficient);
             Statuses.Add(status);
@@ -107,16 +89,16 @@ namespace Unit
             Statuses.Remove(status);
         }
 
-        protected abstract bool CanCast(Ability.Ability ability);
+        public abstract bool CanCast(AbilityData abilityData);
 
-        protected abstract void PreCastDoing(Ability.Ability ability);
+        public abstract void PreCastDoing(AbilityData abilityData);
 
-        public void UseAbility(Ability.Ability ability)
+        public void UseAbility(AbilityData abilityData)
         {
-            _usedAbilities.Enqueue(ability);
+            _usedAbilities.Enqueue(abilityData);
         }
         
-        private IEnumerator TimeAbilityThread(TimeAbility ability)
+        private IEnumerator TimeAbilityThread(TimeAbilityData abilityData)
         {
             while (true)
             {
@@ -124,12 +106,12 @@ namespace Unit
                 while (cooldownProgress < 1)
                 {
                     yield return new WaitForSeconds(0.05f);
-                    cooldownProgress += 0.05f / (ability.Cooldown * GetStatusesPower(StatusData.StatusType.CastCooldown));
+                    cooldownProgress += 0.05f / (abilityData.Cooldown * GetStatusesPower(StatusData.StatusType.CastCooldown));
                 }
                 
-                if (!_usedAbilities.Contains(ability))
+                if (!_usedAbilities.Contains(abilityData))
                 {
-                    UseAbility(ability);
+                    UseAbility(abilityData);
                 }
             }
         }
@@ -157,20 +139,20 @@ namespace Unit
                 if (_usedAbilities.Count != 0 && !_busy)
                 {
                     _busy = true;
-                    StartCoroutine(Cast(_usedAbilities.Dequeue()));
+                    Cast(_usedAbilities.Dequeue());
                 }
             }
         }
 
         protected abstract IEnumerator Die();
         public abstract int GetLevel();
-        protected abstract String GetTargetType(bool summonExist);
-        protected abstract float GetModificator(Ability.Ability ability);
+        public abstract String GetTargetType(bool summonExist);
+        public abstract float GetModificator(AbilityData abilityData);
         protected abstract float GetMaxHpModificator();
     
         public void TakeDamage(int damage)
         {
-            if (_die)
+            if (IsDie)
             {
                 return;
             }
@@ -186,14 +168,14 @@ namespace Unit
                     status.TickHandler();
                     return;
                 }
-                _die = true;
+                IsDie = true;
                 StartCoroutine(Die());
             }
         }
     
         public void TakeHeal(int heal)
         {
-            if (_die)
+            if (IsDie)
             {
                 return;
             }

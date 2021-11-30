@@ -30,7 +30,7 @@ namespace Unit
             return Level;
         }
 
-        protected override string GetTargetType(bool summonExist)
+        public override string GetTargetType(bool summonExist)
         {
             if (summonExist)
             {
@@ -39,7 +39,7 @@ namespace Unit
             return "Wizard";
         }
 
-        protected override float GetModificator(Ability.Ability ability)
+        public override float GetModificator(Ability.AbilityData abilityData)
         {
             return 1 + 0.05f * Level;
         }
@@ -48,13 +48,13 @@ namespace Unit
         {
             return 1 + 0.05f * Level;
         }
-    
-        protected override bool CanCast(Ability.Ability ability)
+
+        public override bool CanCast(Ability.AbilityData abilityData)
         {
             return true;
         }
 
-        protected override void PreCastDoing(Ability.Ability ability)
+        public override void PreCastDoing(Ability.AbilityData abilityData)
         {
         
         }

@@ -40,7 +40,6 @@ public class SpawnEnemy : MonoBehaviour
     {
         GameObject enemyObj = Instantiate(data.Prefab, transform.position, Quaternion.identity);
         enemyObj.transform.SetParent(transform);
-        enemyObj.transform.Rotate(0, 180, 0);
         Enemy enemy = enemyObj.GetComponent<Enemy>();
         enemy.Level = level;
         enemy.data = data;

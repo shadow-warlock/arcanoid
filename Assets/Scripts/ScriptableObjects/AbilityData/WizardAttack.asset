@@ -19,4 +19,4 @@ MonoBehaviour:
   damageTime: 0.5
   targetStatuses: []
   casterStatuses: []
-  cooldown: 2
+  cooldown: 4

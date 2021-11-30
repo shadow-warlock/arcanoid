@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Status
@@ -17,7 +18,8 @@ namespace Status
             }
         }
         private Status _status;
-
+        public Action<string, bool> OnTick;
+        
         private void OnStatusDelete()
         {
             transform.SetParent(null);
@@ -29,6 +31,7 @@ namespace Status
         private void OnStatusTick()
         {
             GetComponent<Image>().fillAmount = 1.0f - (float) Status.CurrentTime / Status.Time;
+            OnTick(Status.Text, false);
         }
     }
 }

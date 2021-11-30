@@ -33,7 +33,7 @@ namespace Unit
         private int _exp = 0;
         private int[] _mana = new int[3] {0, 0, 0};
         private Summon _summon;
-        public ManaAbility[] abilities;
+        public ManaAbilityData[] abilities;
         public GameObject levelUpPanel;
         private GameObject _gameController;
         public GameObject summonSpawner;
@@ -63,16 +63,16 @@ namespace Unit
             UpdateMana(manaIndex);
         }
 
-        public void Summon(SummonAbility ability)
+        public void Summon(SummonAbilityData abilityData)
         {
             if (_summon != null)
             {
                 _summon.Delete();
             }
-            GameObject summon = Instantiate(ability.Summon.Prefab, summonSpawner.transform.position, Quaternion.identity, summonSpawner.transform);
+            GameObject summon = Instantiate(abilityData.Summon.Prefab, summonSpawner.transform.position, Quaternion.identity, summonSpawner.transform);
             _summon = summon.GetComponent<Summon>();
             _summon.owner = this;
-            _summon.Level = (int) (ability.Summon.BaseLevel * GetModificator(ability));
+            _summon.Level = (int) (abilityData.Summon.BaseLevel * GetModificator(abilityData));
             if (OnSummon != null) OnSummon(_summon);
         }
 
@@ -96,36 +96,36 @@ namespace Unit
             _gameController.GetComponent<GameController>().GameOver("Персонаж погиб");
         }
 
-        protected override string GetTargetType(bool summonExist)
+        public override string GetTargetType(bool summonExist)
         {
             return "Enemy";
         }
 
-        protected override bool CanCast(Ability.Ability ability)
+        public override bool CanCast(Ability.AbilityData abilityData)
         {
-            return ability switch
+            return abilityData switch
             {
-                TimeAbility _ => true,
-                ManaAbility manaAbility => HasMana(manaAbility.ManaType, manaAbility.ManaCost),
+                TimeAbilityData _ => true,
+                ManaAbilityData manaAbility => HasMana(manaAbility.ManaType, manaAbility.ManaCost),
                 _ => false
             };
         }
 
-        protected override void PreCastDoing(Ability.Ability ability)
+        public override void PreCastDoing(Ability.AbilityData abilityData)
         {
-            if (ability is ManaAbility manaAbility)
+            if (abilityData is ManaAbilityData manaAbility)
             {
                 RemoveMana(manaAbility.ManaType, manaAbility.ManaCost);
             }
         }
-    
-        protected override float GetModificator(Ability.Ability ability)
+
+        public override float GetModificator(Ability.AbilityData abilityData)
         {
-            return ability switch
+            return abilityData switch
             {
-                TimeAbility _ => 1 + 0.1f * GetLevel(),
-                SummonAbility summonAbility => 1 + 1 * _levels[(int) summonAbility.ManaType],
-                ManaAbility manaAbility => 1 + 0.05f * _levels[(int) manaAbility.ManaType],
+                TimeAbilityData _ => 1 + 0.1f * GetLevel(),
+                SummonAbilityData summonAbility => 1 + 1 * _levels[(int) summonAbility.ManaType],
+                ManaAbilityData manaAbility => 1 + 0.05f * _levels[(int) manaAbility.ManaType],
                 _ => 1
             };
         }

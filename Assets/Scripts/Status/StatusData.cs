@@ -39,7 +39,7 @@ namespace Status
         protected bool increasePower;
         
         [SerializeField]
-        protected List<StatusAbility> abilities = new List<StatusAbility>();
+        protected List<AbilityData> abilities = new List<AbilityData>();
     
         public StatusType Type => type;
         public int Time => time;
@@ -48,6 +48,6 @@ namespace Status
         public Sprite Icon => icon;
         public string Text => text;
         public bool IncreasePower => increasePower;
-        public List<StatusAbility> Abilities => abilities;
+        public List<AbilityData> Abilities => abilities;
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02be9e659b0c4f43bb7129bb97d07165, type: 3}
   m_Name: Phoenix
   m_EditorClassIdentifier: 
-  maxHp: 10
+  maxHp: 100
   abilities: []
   prefab: {fileID: 3423779665701710437, guid: 7a4bb47d00acccf45ade1cdaece38d6d, type: 3}
   baseLevel: 1

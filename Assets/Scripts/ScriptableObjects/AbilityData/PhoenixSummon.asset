@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382965f3643f4e1492266cf6b97004ad, type: 3}
   m_Name: PhoenixSummon
   m_EditorClassIdentifier: 
-  type: 3
+  type: 2
   power: 1
   target: 0
   trigger: Summon

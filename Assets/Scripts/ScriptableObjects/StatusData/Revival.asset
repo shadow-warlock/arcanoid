@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Revival
   m_EditorClassIdentifier: 
   type: 5
-  time: 5
+  time: 1
   tickSize: 10000
   icon: {fileID: 21300000, guid: f19eab17a963136418ad915c8d4a3595, type: 3}
   power: 0
   text: "\u0412\u043E\u0437\u0440\u043E\u0436\u0434\u0435\u043D\u0438\u0435"
   increasePower: 1
   abilities:
-  - {fileID: 11400000, guid: 20a43aa972f5070408dade51195ab481, type: 2}
+  - {fileID: 11400000, guid: 4fcd6414b7070ae41862f2204e43c4c3, type: 2}
+  - {fileID: 11400000, guid: 78327e59c7218474b9dab80ea8b14787, type: 2}

@@ -115,8 +115,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f490318279550e40ab4c53fff91169c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBar: {fileID: 0}
   data: {fileID: 0}
-  damageUIContainer: {fileID: 0}
-  damagePrefab: {fileID: 0}
-  levelText: {fileID: 0}
+  defaultStatuses: []
