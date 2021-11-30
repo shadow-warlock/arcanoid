@@ -11,6 +11,6 @@ namespace Ability
     
 
         public float Cooldown => cooldown;
-
+        
     }
 }

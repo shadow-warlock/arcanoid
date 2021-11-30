@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using Unit;
 using UnityEngine;
 
@@ -20,5 +22,13 @@ namespace Ability
         public Wizard.ManaType ManaType => manaType;
         public Sprite Icon => icon;
 
+        protected override void ChangeType(Unit.Unit caster, Unit.Unit finalTarget)
+        {
+            if (!(caster is Wizard))
+            {
+                throw new Exception("Заклинатель - не маг." + caster.ToString());
+            }
+            base.ChangeType(caster, finalTarget);
+        } 
     }
 }
