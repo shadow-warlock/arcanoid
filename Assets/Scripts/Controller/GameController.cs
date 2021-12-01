@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneTransition.SwitchScene("Menu");
     }
     
     public void GameOver(String text)

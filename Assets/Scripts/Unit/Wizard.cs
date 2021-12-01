@@ -179,5 +179,10 @@ namespace Unit
         {
             UseAbility(abilities[index]);
         }
+
+        public int GetCoins()
+        {
+            return _coins;
+        }
     }
 }
