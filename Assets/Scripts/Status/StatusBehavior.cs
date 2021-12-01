@@ -18,7 +18,6 @@ namespace Status
             }
         }
         private Status _status;
-        public Action<string, bool> OnTick;
         
         private void OnStatusDelete()
         {
@@ -31,7 +30,6 @@ namespace Status
         private void OnStatusTick()
         {
             GetComponent<Image>().fillAmount = 1.0f - (float) Status.CurrentTime / Status.Time;
-            OnTick(Status.Text, false);
         }
     }
 }
