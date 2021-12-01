@@ -53,5 +53,6 @@ public class GameController : MonoBehaviour
         Time.timeScale = 0;
         gameOverModal.SetActive(true);
         gameOverModal.transform.GetChild(1).GetComponent<Text>().text = text;
+        CoinsStore.GetInstance().AddCoins(wizard.GetCoins());
     }
 }
