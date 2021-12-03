@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -10,9 +9,11 @@ public class Player : MonoBehaviour
     private bool _rightWallTouch = false;
     private bool _magnet = false;
     public GameObject hpBar;
-    public int hp;
+    private int hp = 3;
     public GameObject ballPrefab;
     private GameObject _gameController;
+
+    public int Hp => hp;
 
     // Start is called before the first frame update
     private void Start()
@@ -25,7 +26,7 @@ public class Player : MonoBehaviour
 
     private void DrawHp()
     {
-        hpBar.transform.GetChild(0).GetComponent<Text>().text = hp.ToString();
+        hpBar.transform.GetChild(0).GetComponent<Text>().text = Hp.ToString();
     }
 
     private void CreateBall()
@@ -73,9 +74,9 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        hp -= damage;
+        hp = Hp - damage;
         DrawHp();
-        if (hp <= 0)
+        if (Hp <= 0)
         {
             _gameController.GetComponent<GameController>().GameOver("Закончились светлячки");
         }

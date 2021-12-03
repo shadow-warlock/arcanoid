@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Ability;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace UnitData
 {

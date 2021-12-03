@@ -36,14 +36,14 @@ public class GameOver : MonoBehaviour
                 }
                 else
                 {
-                    Player playerScript = player.GetComponent<Player>();
-                    if (playerScript == null)
+                    Platform platformScript = player.GetComponent<Platform>();
+                    if (platformScript == null)
                     {
                         print("playerScript not found");
                     }
                     else
                     {
-                        playerScript.TakeDamage(1);
+                        platformScript.TakeDamage(1);
                     }
                 }
             }

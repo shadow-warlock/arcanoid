@@ -10,10 +10,11 @@ namespace Unit
 {
     public class Wizard : Unit
     {
-        
-        public Action<Summon> OnSummon; 
+        public Action<Summon> OnSummon;
         public Action<int, float, bool> OnUpdateMana;
         public Action<int, int, int> OnUpdateExpAndCoins;
+
+        public override int MAXHp => base.MAXHp + ShopStore.GetInstance().GetProductCount(ShopStore.Product.MaxHp) * 10;
 
         public enum ManaType
         {
@@ -21,11 +22,11 @@ namespace Unit
             Turquoise = 1,
             Blue = 0
         }
-        
+
 
         public int MAXMana(int type)
         {
-            return (int) ((1 + _levels[type] * 0.05) * ((WizardData)data).MaxMana[type]);
+            return (int) ((1 + _levels[type] * 0.05) * ((WizardData) data).MaxMana[type]);
         }
 
         private int _coins = 0;
@@ -45,6 +46,7 @@ namespace Unit
             {
                 UpdateMana(i);
             }
+
             OnUpdateExpAndCoins(_exp, GetExpLevelUp(), _coins);
             _gameController = GameObject.FindWithTag("GameController");
         }
@@ -69,7 +71,9 @@ namespace Unit
             {
                 _summon.Delete();
             }
-            GameObject summon = Instantiate(abilityData.Summon.Prefab, summonSpawner.transform.position, Quaternion.identity, summonSpawner.transform);
+
+            GameObject summon = Instantiate(abilityData.Summon.Prefab, summonSpawner.transform.position,
+                Quaternion.identity, summonSpawner.transform);
             _summon = summon.GetComponent<Summon>();
             _summon.owner = this;
             _summon.Level = (int) (abilityData.Summon.BaseLevel * GetModificator(abilityData));

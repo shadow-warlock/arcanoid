@@ -16,9 +16,9 @@ namespace Unit
         public Action  OnUpdate; 
         public Action<Status.Status>  OnAddStatus;
         
-        public int Hp { get; private set; }
+        public int Hp { get; protected set; }
         public UnitData.UnitData data;
-        public int MAXHp => (int) (data.MaxHp * GetMaxHpModificator());
+        public virtual int MAXHp => (int) (data.MaxHp * GetMaxHpModificator());
         
         private Queue<AbilityData> _usedAbilities = new Queue<AbilityData>();
         public List<Status.Status> Statuses { get; } = new List<Status.Status>();

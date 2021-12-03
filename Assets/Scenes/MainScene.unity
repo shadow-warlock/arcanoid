@@ -4320,7 +4320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5852723504345978374, guid: 4e7ae38b821849248aa67eeab28a4c15, type: 3}
       propertyPath: hp
-      value: 9999
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5852723504345978374, guid: 4e7ae38b821849248aa67eeab28a4c15, type: 3}
       propertyPath: hpBar

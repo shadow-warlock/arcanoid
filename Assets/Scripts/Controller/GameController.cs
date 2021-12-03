@@ -1,4 +1,5 @@
 using System;
+using Component.Coins;
 using Unit;
 using UnitUI;
 using UnityEngine;

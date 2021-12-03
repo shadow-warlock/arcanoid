@@ -13,7 +13,7 @@ public class Block : MonoBehaviour
     public Sprite[] sprites;
     private GameObject _wizard;
     private Wizard.ManaType _type;
-    private const int TouchManaCount = 100;
+    private const int TouchManaCount = 15;
     private const int DestroyManaCount = 300;
 
 
