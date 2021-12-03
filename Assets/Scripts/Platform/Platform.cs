@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Platform : MonoBehaviour
 {
     public float defaultSpeed;
     private float _speed;
@@ -9,11 +9,11 @@ public class Player : MonoBehaviour
     private bool _rightWallTouch = false;
     private bool _magnet = false;
     public GameObject hpBar;
-    private int hp = 3;
+    protected int hp = 3;
     public GameObject ballPrefab;
     private GameObject _gameController;
 
-    public int Hp => hp;
+    public int Hp => hp + ShopStore.GetInstance().GetProductCount(ShopStore.Product.Balls);
 
     // Start is called before the first frame update
     private void Start()
@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        hp = Hp - damage;
+        hp -= damage;
         DrawHp();
         if (Hp <= 0)
         {
