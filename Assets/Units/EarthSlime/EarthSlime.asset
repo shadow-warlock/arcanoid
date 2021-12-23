@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d57973f586f4e1f888c74e5ad26619b, type: 3}
+  m_Name: EarthSlime
+  m_EditorClassIdentifier: 
+  maxHp: 600
+  abilities:
+  - {fileID: 11400000, guid: 90a252e0e84ff46409fca91218c7c7e2, type: 2}
+  - {fileID: 11400000, guid: cf896462a08906d41b1573b5ba2703f4, type: 2}
+  prefab: {fileID: 1461079730983300411, guid: 206fe5ca04557254d9e4b30579359f3c, type: 3}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  coins: 5

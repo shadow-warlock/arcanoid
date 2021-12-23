@@ -31,7 +31,7 @@ namespace Unit
             return "Enemy";
         }
 
-        public override float GetModificator(Ability.AbilityData abilityData)
+        public override float GetModificator(ManaType? type)
         {
             return 1 + 0.05f * Level;
         }
@@ -41,12 +41,12 @@ namespace Unit
             return 1 + 0.05f * Level;
         }
 
-        public override bool CanCast(Ability.AbilityData abilityData)
+        public override bool CanCast(AbilityData abilityData)
         {
             return true;
         }
 
-        public override void PreCastDoing(Ability.AbilityData abilityData)
+        public override void PreCastDoing(AbilityData abilityData)
         {
         
         }

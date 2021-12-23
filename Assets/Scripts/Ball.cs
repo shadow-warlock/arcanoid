@@ -3,14 +3,19 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private float _minSpeed  = 8.0f;
-    private float _maxSpeed  = 10.0f;
-    private float _verticalMinSpeed  = 0.5f;
-    private float _accel = 3.0f;
-    private bool _start = false;
+    private float _speed = 10.0f;
+    private float _minimalNormalizedY = 0.1f;
+    private float _stateChangeDeltaTime = 0;
+    private State state = State.Wait;
+    private float _accelerationTime = 2;
+    private float _slowMotionSpeed = 0.5f;
+    private Vector2 _slowStartSpeed;
     private Rigidbody2D _rigidbody;
-    private float _horizontalTime = 0;
-    private float _horizontalTimeout = 3;
+
+    private enum State
+    {
+        Wait, Run, Slow
+    }
 
     private void Start()
     {
@@ -24,48 +29,35 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        if (_start)
+        float idealSpeed = state switch
         {
-            if (Math.Abs(_rigidbody.velocity.y) < _verticalMinSpeed)
-            {
-                _horizontalTime += Time.deltaTime;
-            }
-            else
-            {
-                _horizontalTime = 0;
-            }
-
-            if (_horizontalTime >= _horizontalTimeout)
-            {
-                _rigidbody.AddRelativeForce(new Vector2(0, 1) * 2);
-            }
-        }
-    }
-
-    private void FixedUpdate ()
-    {
-        if (_start)
-        {
-            if(_rigidbody.velocity.magnitude < _minSpeed)
-                _rigidbody.AddRelativeForce(_rigidbody.velocity * _accel);
-            if(_rigidbody.velocity.magnitude > _maxSpeed)
-                _rigidbody.AddRelativeForce(_rigidbody.velocity * -_accel);
-        }
+            State.Slow => _slowMotionSpeed,
+            State.Run => _speed,
+            _ => 0
+        };
+        _stateChangeDeltaTime += Time.deltaTime;
+        _rigidbody.velocity = _rigidbody.velocity.normalized * idealSpeed *
+                              (Math.Min(_stateChangeDeltaTime / _accelerationTime, 1));
     }
 
     public void Pulse()
     {
-        _horizontalTime = 0;
-        _start = true;
+        state = State.Run;
+        _stateChangeDeltaTime = 0;
         transform.SetParent(GameObject.FindWithTag("BallContainer").transform);
-        _rigidbody.AddRelativeForce(new Vector2(0, 1) * _accel);
-    }
-    
-    public void Magnet(Transform magnet)
-    {
-        _start = false;
-        transform.SetParent(magnet);
-        _rigidbody.velocity = new Vector2(0, 0);
     }
 
+    public void Slow()
+    {
+        state = State.Slow;
+        _stateChangeDeltaTime = 0;
+        _slowStartSpeed = _rigidbody.velocity;
+    }
+
+    public void Haste()
+    {
+        state = State.Run;
+        _stateChangeDeltaTime = 0;
+        _rigidbody.velocity = _slowStartSpeed.normalized;
+    }
 }

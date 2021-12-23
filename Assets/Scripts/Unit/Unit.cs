@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Ability;
-using Status;
 using UnityEngine;
 
 namespace Unit
@@ -12,19 +9,18 @@ namespace Unit
     {
         public Action OnCreate;
         public Action OnDelete; 
-        public Action<string, bool> OnDamage;
+        public Action<Unit, int, bool> OnDamage;
         public Action  OnUpdate; 
-        public Action<Status.Status>  OnAddStatus;
+        public Func<Unit, bool>  BeforeDie; 
+        public Action<IStatus>  OnAddStatus;
         
         public int Hp { get; protected set; }
         public UnitData.UnitData data;
         public virtual int MAXHp => (int) (data.MaxHp * GetMaxHpModificator());
         
         private Queue<AbilityData> _usedAbilities = new Queue<AbilityData>();
-        public List<Status.Status> Statuses { get; } = new List<Status.Status>();
 
-        [SerializeField]
-        private List<StatusData> defaultStatuses = new List<StatusData>(); 
+
         private bool _busy;
         public bool IsDie { get; private set; }
 
@@ -37,12 +33,12 @@ namespace Unit
                 StartCoroutine(TimeAbilityThread(ability));
             }
             StartCoroutine(CastThread());
-            foreach (StatusData data in defaultStatuses)
+            foreach (StatusData data in data.DefaultStatuses)
             {
-                AddStatus(data, this, 1);
+                AddStatus(data, this, GetModificator(null));
             }
 
-            if (OnCreate != null) OnCreate();
+            OnCreate?.Invoke();
 
         }
 
@@ -76,18 +72,14 @@ namespace Unit
         }
 
         // Use for status target (not caster)
-        public void AddStatus(StatusData statusData, Unit caster, float coefficient)
+        public ICountStatus AddStatus(StatusData data, Unit caster, float multiplier)
         {
-            Status.Status status = new Status.Status(statusData, caster, this, coefficient);
-            Statuses.Add(status);
-            StartCoroutine(status.Work());
-            if (OnAddStatus != null) OnAddStatus(status);
+            ICountStatus status = StatusFactory.CreateStatus(data, caster, this, multiplier);
+            status.Work();
+            OnAddStatus?.Invoke(status);
+            return status;
         }
         
-        public void OnStatusEnd(Status.Status status)
-        {
-            Statuses.Remove(status);
-        }
 
         public abstract bool CanCast(AbilityData abilityData);
 
@@ -106,7 +98,7 @@ namespace Unit
                 while (cooldownProgress < 1)
                 {
                     yield return new WaitForSeconds(0.05f);
-                    cooldownProgress += 0.05f / (abilityData.Cooldown * GetStatusesPower(StatusData.StatusType.CastCooldown));
+                    cooldownProgress += 0.05f / abilityData.Cooldown;
                 }
                 
                 if (!_usedAbilities.Contains(abilityData))
@@ -115,21 +107,7 @@ namespace Unit
                 }
             }
         }
-
-        protected float GetStatusesPower(StatusData.StatusType type)
-        {
-            return Statuses.Where(status => status.Type == type).Aggregate<Status.Status, float>(1, (current, status) => current * status.Power);
-        }
         
-        protected bool IsStatusExist(StatusData.StatusType type)
-        {
-            return Statuses.Any(status => status.Type == type);
-        }
-        
-        protected Status.Status GetStatus(StatusData.StatusType type)
-        {
-            return Statuses.Find(status => status.Type == type);
-        }
         
         private IEnumerator CastThread()
         {
@@ -147,10 +125,10 @@ namespace Unit
         protected abstract IEnumerator Die();
         public abstract int GetLevel();
         public abstract String GetTargetType(bool summonExist);
-        public abstract float GetModificator(AbilityData abilityData);
+        public abstract float GetModificator(ManaType? type);
         protected abstract float GetMaxHpModificator();
     
-        public void TakeDamage(int damage)
+        public void TakeDamage(Unit damager, int damage)
         {
             if (IsDie)
             {
@@ -159,21 +137,18 @@ namespace Unit
 
             int realDamage = Math.Min(damage, Hp);
             Hp -= realDamage;
-            if (OnDamage != null) OnDamage(realDamage.ToString(), false);
+            OnDamage?.Invoke(damager, realDamage, false);
             if (Hp == 0)
             {
-                if (IsStatusExist(StatusData.StatusType.Revival))
+                IsDie = BeforeDie == null || BeforeDie(damager);
+                if (IsDie && this != null)
                 {
-                    Status.Status status = GetStatus(StatusData.StatusType.Revival);
-                    status.TickHandler();
-                    return;
+                    StartCoroutine(Die());
                 }
-                IsDie = true;
-                StartCoroutine(Die());
             }
         }
     
-        public void TakeHeal(int heal)
+        public void TakeHeal(Unit healer, int heal)
         {
             if (IsDie)
             {
@@ -181,18 +156,13 @@ namespace Unit
             }
             int realHeal = Math.Min(MAXHp - Hp, heal);
             Hp += realHeal;
-            if (OnDamage != null) OnDamage(realHeal.ToString(), true);
+            OnDamage?.Invoke(healer, realHeal, true);
         }
         
 
         public void Delete()
         {
-            if (OnDelete != null) OnDelete();
-            foreach (Status.Status status in Statuses)
-            {
-                status.Stop();
-            }
-            Statuses.Clear();
+            OnDelete?.Invoke();
             transform.SetParent(null);
             Destroy(gameObject);
         }

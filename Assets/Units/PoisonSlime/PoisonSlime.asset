@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d57973f586f4e1f888c74e5ad26619b, type: 3}
   m_Name: PoisonSlime
   m_EditorClassIdentifier: 
-  maxHp: 500
+  maxHp: 350
   abilities:
   - {fileID: 11400000, guid: d03a21dff2065d94baaeb5dd2ed21062, type: 2}
   prefab: {fileID: 1461079730983300411, guid: afe1c3e1ddd87384ab1aac94b3a4118c, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
+  coins: 7

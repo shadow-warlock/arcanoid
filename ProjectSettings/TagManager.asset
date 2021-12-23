@@ -18,6 +18,7 @@ TagManager:
   - CastContainer
   - LevelUpPanel
   - Summon
+  - ArcanoidField
   layers:
   - Default
   - TransparentFX

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45740af92f3e4f20947d67d3fd2db9df, type: 3}
+  m_Name: LeaveStatus
+  m_EditorClassIdentifier: 
+  icon: {fileID: -495438174975639113, guid: 87acf1615eaf13a4980d1135fe7a6461, type: 3}
+  isView: 1
+  count: 20
+  tickTime: 1
+  onTickEffects: []

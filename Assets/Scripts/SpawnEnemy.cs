@@ -26,14 +26,22 @@ public class SpawnEnemy : MonoBehaviour
     
     private IEnumerator Spawn()
     {
-        yield return new WaitForSeconds(2f);
         int iterationOnLevelList = _iteration % levelData.Enemies.Count;
         int levelListNumber = _iteration / levelData.Enemies.Count;
-        int level = (int) (levelData.Levels[iterationOnLevelList] * (1 + levelData.MultipleLevel * levelListNumber) +
-                             levelData.IncreaseLevel * levelListNumber);
-        Spawn(levelData.Enemies[iterationOnLevelList], level);
-        _spawned = false;
-        _iteration++;
+        if (levelData.Change[iterationOnLevelList] >= Random.Range(0f, 1f))
+        {
+            yield return new WaitForSeconds(levelData.SpawnTime);
+            int level = (int) (levelData.Levels[iterationOnLevelList] * (1 + levelData.MultipleLevel * levelListNumber) +
+                               levelData.IncreaseLevel * levelListNumber);
+            Spawn(levelData.Enemies[iterationOnLevelList], level);
+            _spawned = false;
+            _iteration++;
+        }
+        else
+        {
+            _iteration++;
+            StartCoroutine(Spawn());
+        }
     }
     
     public void Spawn(EnemyData data, int level)

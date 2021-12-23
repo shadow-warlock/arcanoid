@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f29af4b99d455090e996c72d479373, type: 3}
+  m_Name: LeaveOnEnd
+  m_EditorClassIdentifier: 
+  icon: {fileID: 5323597017944248936, guid: 87acf1615eaf13a4980d1135fe7a6461, type: 3}
+  isView: 0
+  count: 1
+  increaseCount: 0
+  increaseDecoratedCount: 0
+  decoratedData: {fileID: 11400000, guid: b74638bfff005d148bfc1e9f8093c69d, type: 2}
+  targetEffects:
+  - {fileID: 11400000, guid: 810e0b57fc9174d438f4f857115eb1ec, type: 2}
+  casterEffects: []

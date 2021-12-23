@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Ability;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace UnitData
 {
@@ -11,6 +9,11 @@ namespace UnitData
         [SerializeField] 
         protected Color color;
         
+        [SerializeField] 
+        protected int coins;
+        
         public Color Color => color;
+
+        public int Coins => coins;
     }
 }

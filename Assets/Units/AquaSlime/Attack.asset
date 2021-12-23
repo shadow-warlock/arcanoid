@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be9bb084c0294f0b969bb8c6ebe372ca, type: 3}
   m_Name: Attack
   m_EditorClassIdentifier: 
-  type: 0
-  power: 40
   target: 1
   trigger: Attack
-  damageTime: 0.5
+  actionTime: 0.5
   targetStatuses: []
   casterStatuses: []
+  targetEffects:
+  - {fileID: 11400000, guid: a7eab000fd30b8e42801de2a2dbbde56, type: 2}
+  casterEffects: []
   cooldown: 3

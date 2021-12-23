@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d57973f586f4e1f888c74e5ad26619b, type: 3}
+  m_Name: Chest
+  m_EditorClassIdentifier: 
+  maxHp: 300
+  abilities: []
+  prefab: {fileID: 1461079730983300411, guid: 1c69bd3bec0d3a044814430b640be84f, type: 3}
+  defaultStatuses:
+  - {fileID: 11400000, guid: 456a41cd639477440809370c4aa2bcc0, type: 2}
+  - {fileID: 11400000, guid: fc9fa2a94b399d04e8595bea41a33555, type: 2}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  coins: 15

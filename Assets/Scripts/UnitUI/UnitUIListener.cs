@@ -1,5 +1,4 @@
-﻿using Status;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace UnitUI
@@ -55,30 +54,40 @@ namespace UnitUI
             Transform damageUIContainer = statusPanel.transform.GetChild(3);
             for(int i=0; i < damageUIContainer.childCount; i++)
             {
-                Transform statusTransform = damageUIContainer.GetChild(i);
+                Transform damageTransform = damageUIContainer.GetChild(i);
+                damageTransform.SetParent(null);
+                Destroy(damageTransform.gameObject);
+            }
+            Transform statusesContainer = statusPanel.transform.GetChild(2);
+            for(int i=0; i < statusesContainer.childCount; i++)
+            {
+                Transform statusTransform = statusesContainer.GetChild(i);
                 statusTransform.SetParent(null);
                 Destroy(statusTransform.gameObject);
             }
             statusPanel.SetActive(false);
         }
 
-        protected void OnAddStatus(Status.Status status)
+        protected void OnAddStatus(IStatus status)
         {
-            Transform statusesContainer = statusPanel.transform.GetChild(2);
-            GameObject statusObj = Instantiate(statusPrefab, statusesContainer.position, Quaternion.identity, statusesContainer);
-            StatusBehavior statusUI = statusObj.GetComponent<StatusBehavior>();
-            statusUI.Status = status;
+            if (status.IsView)
+            {
+                Transform statusesContainer = statusPanel.transform.GetChild(2);
+                GameObject statusObj = Instantiate(statusPrefab, statusesContainer.position, Quaternion.identity, statusesContainer);
+                StatusBehavior statusUI = statusObj.GetComponent<StatusBehavior>();
+                statusUI.Status = status;
+            }
         }
 
 
-        protected void OnDamage(string text, bool positive)
+        protected void OnDamage(Unit.Unit damager, int damage, bool isPositive)
         {
             Transform damageUIContainer = statusPanel.transform.GetChild(3);
             GameObject damageUI = Instantiate(damagePrefab, damageUIContainer.position, Quaternion.identity);
             damageUI.transform.SetParent(damageUIContainer);
             damageUI.transform.localScale = new Vector3(1, 1, 1);
-            damageUI.GetComponent<Text>().text = text;
-            if (positive)
+            damageUI.GetComponent<Text>().text = damage.ToString();
+            if (isPositive)
             {
                 damageUI.GetComponent<Text>().color = new Color(0.25f, 1f, 0.24f);
             }

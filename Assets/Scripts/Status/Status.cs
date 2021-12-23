@@ -1,114 +1,33 @@
-﻿using System;
-using System.Collections;
-using Ability;
+﻿
+using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-namespace Status
+public abstract class Status<T> : IStatus where T : StatusData
 {
-    public class Status
+    public Unit.Unit Caster { get; }
+    public Unit.Unit Target { get; }
+    public float Multiplier { get; }
+    public T Data { get; }
+
+    protected Status(Unit.Unit caster, Unit.Unit target, T data, float multiplier)
     {
-        public Action OnTick;
-        public Action OnDelete;
+        Caster = caster;
+        Target = target;
+        Data = data;
+        Multiplier = multiplier;
+        Target.OnDelete += Delete;
+    }
 
-        private StatusData Data { get; }
-        private int _currentTime;
-        private float Coefficient { get; }
-        private Unit.Unit Caster { get; }
-        private Unit.Unit Target { get; }
+    public abstract void Work();
 
-        
-        public Status(StatusData data, Unit.Unit caster, Unit.Unit target, float coefficient)
-        {
-            Data = data;
-            Caster = caster;
-            Target = target;
-            Coefficient = coefficient;
-            _currentTime = 1;
-        }
 
-        public IEnumerator Work()
-        {
-            while (!IsEnd())
-            {
-                float waitTickSize = 0;
-                while (!IsEnd() && waitTickSize < TickSize)
-                {
-                    waitTickSize += 0.05f;
-                    yield return new WaitForSeconds(0.05f);
-
-                }
-                if (!IsEnd())
-                {
-                    Tick();
-                }
-            }
-            Delete();
-        }
-
-        public void TickHandler()
-        {
-            if (!IsEnd())
-            {
-                Tick();
-            }
-            if (IsEnd())
-            {
-                Delete();
-            }
-        }
-
-        private void Tick()
-        {
-            switch (Type)
-            {
-                case StatusData.StatusType.Damage:
-                    Target.TakeDamage((int) (Power * Random.Range(0.9f, 1.1f)));
-                    break;
-                case StatusData.StatusType.Heal:
-                    Target.TakeHeal((int) (Power * Random.Range(0.9f, 1.1f)));
-                    break;
-                case StatusData.StatusType.CastCooldown:
-                    break;
-                case StatusData.StatusType.Silent:
-                    break;
-                case StatusData.StatusType.Disarm:
-                    break;
-                case StatusData.StatusType.Revival:
-                    foreach (AbilityData ability in Data.Abilities)
-                    {
-                        Target.UseAbility(ability);
-                    }
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            _currentTime++;
-            if (OnTick != null) OnTick();
-        }
-
-        public void Stop()
-        {
-            if (OnDelete != null) OnDelete();
-        }
-        
-        private void Delete()
-        {
-            Target.OnStatusEnd(this);
-            if (OnDelete != null) OnDelete();
-        }
-
-        public bool IsEnd()
-        {
-            return Data.Time < _currentTime;
-        }
-
-        public StatusData.StatusType Type => Data.Type;
-        public int Time => Data.Time;
-        public int CurrentTime => _currentTime;
-        public float TickSize => Data.TickSize;
-        public float Power => Data.Power * (Data.IncreasePower ? Coefficient : 1 / Coefficient);
-        public Sprite Icon => Data.Icon;
-        public string Text => Data.Text;
+    public Sprite Icon => Data.Icon;
+    public bool IsView => Data.IsView;
+    public Action OnDelete { get; set; }
+    public Action<float> OnTick { get; set; }
+    
+    protected virtual void Delete()
+    {
+        OnDelete?.Invoke();
     }
 }

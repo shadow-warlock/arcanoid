@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5593504067091026079}
+  - component: {fileID: 3161152076440682166}
   - component: {fileID: 1109701706177521979}
   - component: {fileID: 9103827724673311158}
   - component: {fileID: 786742431448930719}
@@ -19,7 +19,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5593504067091026079
+--- !u!4 &3161152076440682166
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 8365572667551945455}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -122,7 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47d844ceab5ba444a7df64685ef8f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture: {fileID: 2800000, guid: 750509758be54d240acc1695bb93fbc9, type: 3}
   sprites:
   - {fileID: 1555695727865631640, guid: 750509758be54d240acc1695bb93fbc9, type: 3}
   - {fileID: 692371484494601432, guid: 750509758be54d240acc1695bb93fbc9, type: 3}

@@ -48,6 +48,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -57,8 +58,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -304,6 +305,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      PhoenixDeath_6: -8138532364168318949
+      PhoenixDeath_7: -8692261412168380840
+      PhoenixDeath_2: 2556765974614157307
+      PhoenixDeath_3: -7540218890138520866
+      PhoenixDeath_1: -1751257473561531076
+      PhoenixDeath_5: 7980812920904743308
+      PhoenixDeath_4: 7734973159180787403
+      PhoenixDeath_0: -7882266435852725676
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
