@@ -15,6 +15,8 @@ public class Block : MonoBehaviour
     private const int TouchManaCount = 15;
     private const int DestroyManaCount = 30;
     private const float EmptyChance = 0.2f;
+    [SerializeField]
+    private GameObject _particlePrefab;
 
 
     private void Start()
@@ -42,6 +44,9 @@ public class Block : MonoBehaviour
         if (collision.gameObject.CompareTag("Ball"))
         {
             collision.gameObject.GetComponent<Ball>().DamageAnimation();
+            GameObject particle = Instantiate(_particlePrefab, transform.position, transform.rotation, transform.parent);
+            ParticleSystem.MainModule main = particle.GetComponent<ParticleSystem>().main;
+            main.startColor = WizardUIListener.GetColor(_type);
             _hp--;
             _spriteRenderer.sprite = sprites[Math.Max(MAXHp - _hp, 0)];
             if (_type != null)

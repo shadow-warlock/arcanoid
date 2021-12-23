@@ -6,6 +6,7 @@ public class Ball : MonoBehaviour
     private const float Speed = 9.0f;
     private float _stateChangeDeltaTime = 0;
     private Vector2 _minimalVertical = new Vector2(0.9f, 0.1f);
+    private bool _start = false;
     private State state = State.Wait;
     private const float AccelerationTime = 2;
     private Vector2 _slowStartSpeed;
@@ -41,8 +42,9 @@ public class Ball : MonoBehaviour
             normalized = new Vector2(x, y);
         }
 
-        if (state == State.Run && _stateChangeDeltaTime == 0)
+        if (state == State.Run && !_start)
         {
+            _start = true;
             normalized = new Vector2(0, 1);
         }
         _stateChangeDeltaTime += Time.deltaTime;
