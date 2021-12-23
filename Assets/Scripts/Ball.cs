@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private float _speed = 10.0f;
+    private const float Speed = 9.0f;
     private float _stateChangeDeltaTime = 0;
+    private Vector2 _minimalVertical = new Vector2(0.9f, 0.1f);
     private State state = State.Wait;
-    private float _accelerationTime = 2;
+    private const float AccelerationTime = 2;
     private Vector2 _slowStartSpeed;
     private Rigidbody2D _rigidbody;
 
@@ -29,19 +30,31 @@ public class Ball : MonoBehaviour
     {
         float idealSpeed = state switch
         {
-            State.Run => _speed,
+            State.Run => Speed,
             _ => 0
         };
+        Vector2 normalized = _rigidbody.velocity.normalized;
+        if (Math.Abs(normalized.y) < Math.Abs(_minimalVertical.y))
+        {
+            float x = _minimalVertical.x * Mathf.Sign(normalized.x);
+            float y = _minimalVertical.y * Mathf.Sign(normalized.y);
+            normalized = new Vector2(x, y);
+        }
+
+        if (state == State.Run && _stateChangeDeltaTime == 0)
+        {
+            normalized = new Vector2(0, 1);
+        }
         _stateChangeDeltaTime += Time.deltaTime;
-        _rigidbody.velocity = _rigidbody.velocity.normalized * idealSpeed *
-                              (Math.Min(_stateChangeDeltaTime / _accelerationTime, 1));
+        _rigidbody.velocity = normalized * idealSpeed * (Math.Min(_stateChangeDeltaTime / AccelerationTime, 1));
     }
 
     public void Pulse()
     {
+        transform.SetParent(GameObject.FindWithTag("BallContainer").transform);
         state = State.Run;
         _stateChangeDeltaTime = 0;
-        transform.SetParent(GameObject.FindWithTag("BallContainer").transform);
+        _rigidbody.velocity = new Vector2(0, 1);
     }
 
     public void Slow()
