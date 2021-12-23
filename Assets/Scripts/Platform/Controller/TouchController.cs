@@ -14,22 +14,17 @@ public class TouchController : IController
                 click = true;
                 return Vector2.up;
             }
-            if (Input.GetMouseButtonUp(0) && click)
-            {
-                click = false;
-                return Vector2.down;
-            }
-            if (Input.GetMouseButton(0) && click)
-            {
-                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                return new Vector2(worldPosition.x - platform.transform.position.x, 0);
-            }
-        }else if (click)
+        }
+        if (Input.GetMouseButtonUp(0) && click)
         {
             click = false;
             return Vector2.down;
         }
-
+        if (Input.GetMouseButton(0) && click)
+        {
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            return new Vector2(worldPosition.x - platform.transform.position.x, 0);
+        }
         return Vector2.zero;
     }
 }

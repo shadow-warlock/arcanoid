@@ -3,7 +3,7 @@
 public class Touch2Controller : IController
 {
 
-    private bool click = false;
+    private int? click = null;
 
     public Vector2 Update(Platform platform)
     {
@@ -12,23 +12,19 @@ public class Touch2Controller : IController
         {
             if (touch.phase == TouchPhase.Began)
             {
-                click = true;
+                click = touch.fingerId;
                 return Vector2.up;
             }
-            if (touch.phase is TouchPhase.Ended or TouchPhase.Canceled && click)
-            {
-                click = false;
-                return Vector2.down;
-            }
-            if (touch.phase == TouchPhase.Moved && click)
-            {
-                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                return new Vector2(worldPosition.x - platform.transform.position.x, 0);
-            }
-        }else if (click)
+        }
+        if (touch.phase is TouchPhase.Ended or TouchPhase.Canceled && click == touch.fingerId)
         {
-            click = false;
+            click = null;
             return Vector2.down;
+        }
+        if (touch.phase == TouchPhase.Moved && click == touch.fingerId)
+        {
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            return new Vector2(worldPosition.x - platform.transform.position.x, 0);
         }
 
         return Vector2.zero;
