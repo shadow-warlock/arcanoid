@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,17 +8,26 @@ public class Platform : MonoBehaviour
     private float _speed;
     private bool _leftWallTouch = false;
     private bool _rightWallTouch = false;
-    private bool _magnet = false;
     public GameObject hpBar;
     protected int hp = 3;
     public GameObject ballPrefab;
+    public GameObject ballContainer;
     private GameObject _gameController;
+
+    private Vector2? moveDirection;
+
+    private IController controller;
 
     public int Hp => hp + ShopStore.GetInstance().GetProductCount(ShopStore.Product.Balls);
 
     // Start is called before the first frame update
     private void Start()
     {
+#if UNITY_ANDROID
+        controller = new Touch2Controller();
+#else
+        controller = new TouchController();
+#endif
         _gameController = GameObject.FindWithTag("GameController");
         _speed = defaultSpeed;
         DrawHp();
@@ -39,35 +49,32 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKey(KeyCode.A) && !_leftWallTouch)
-        {
-            transform.Translate(Vector2.left * (_speed * Time.deltaTime));
-        }
-        else if (Input.GetKey(KeyCode.D) && !_rightWallTouch)
-        {
-            transform.Translate(Vector2.right * (_speed * Time.deltaTime));
-        }
-        else if (Input.GetKey(KeyCode.W))
+        Vector2 direction = controller.Update(this);
+        if (direction == Vector2.up)
         {
             foreach (Transform ball in transform.GetChild(0))
             {
                 ball.GetComponent<Ball>().Pulse();
             }
+            foreach (Transform ball in ballContainer.transform)
+            {
+                ball.GetComponent<Ball>().Haste();
+            }
         }
-        else if (Input.GetKeyUp(KeyCode.Q))
+        if (direction == Vector2.down)
         {
-            if (_magnet)
+            foreach (Transform ball in ballContainer.transform)
             {
-                _magnet = false;
-                gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+                ball.GetComponent<Ball>().Slow();
             }
-            else
-            {
-                _magnet = true;
-                gameObject.GetComponent<SpriteRenderer>().color = new Color(0.5f, 1, 1);
-            }
-
-
+        }
+        if (direction.x < - 0.1f && !_leftWallTouch)
+        {
+            transform.Translate(new Vector3(Math.Abs(direction.x) > _speed * Time.deltaTime ? -_speed * Time.deltaTime : direction.x, 0) );
+        }
+        else if (direction.x > 0.1f && !_rightWallTouch)
+        {
+            transform.Translate(new Vector3(Math.Abs(direction.x) > _speed * Time.deltaTime ? _speed * Time.deltaTime : direction.x, 0) );
         }
     }
 
@@ -98,12 +105,6 @@ public class Platform : MonoBehaviour
         if (rightCollision)
         {
             _rightWallTouch = true;
-        }
-
-        bool ballCollision = collision.gameObject.CompareTag("Ball");
-        if (ballCollision && _magnet)
-        {
-            collision.gameObject.GetComponent<Ball>().Magnet(transform.GetChild(0));
         }
     }
 

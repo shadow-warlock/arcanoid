@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: c753479acc856e2449ab8ccb1c8fa8e3
+guid: d5858556ab58cb047949858a2be214ad
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7008412969330441016
-    second: Attack_0
+      213: 1552828418339314068
+    second: SlimeAttack(2)_0
   - first:
-      213: -7763475090823894447
-    second: Attack_1
+      213: 3130922437632738009
+    second: SlimeAttack(2)_1
   - first:
-      213: 302641331129538988
-    second: Attack_2
+      213: -6347649379300010336
+    second: SlimeAttack(2)_2
   - first:
-      213: -6329420634031446844
-    second: Attack_3
+      213: 3307233205768347904
+    second: SlimeAttack(2)_3
   - first:
-      213: -910092549403018386
-    second: Attack_4
+      213: -665293626931158175
+    second: SlimeAttack(2)_4
   - first:
-      213: 221524225039350300
-    second: Attack_5
+      213: 2161363704151662935
+    second: SlimeAttack(2)_5
   - first:
-      213: 1290532464073988732
-    second: Attack_6
+      213: 3172267531052855754
+    second: SlimeAttack(2)_6
   - first:
-      213: 4780903288873104255
-    second: Attack_7
+      213: -2211206959091655879
+    second: SlimeAttack(2)_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -48,6 +48,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -57,8 +58,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -89,7 +90,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
@@ -101,7 +102,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
@@ -113,7 +114,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
@@ -127,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Attack_0
+      name: SlimeAttack(2)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,14 +142,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c481db598d1dbe90800000000000000
-      internalID: -7008412969330441016
+      spriteID: 4991f302831cc8510800000000000000
+      internalID: 1552828418339314068
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_1
+      name: SlimeAttack(2)_1
       rect:
         serializedVersion: 2
         x: 256
@@ -162,14 +163,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15a29dc9988924490800000000000000
-      internalID: -7763475090823894447
+      spriteID: 9d246626e55437b20800000000000000
+      internalID: 3130922437632738009
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_2
+      name: SlimeAttack(2)_2
       rect:
         serializedVersion: 2
         x: 0
@@ -183,14 +184,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca9d35cefa2333400800000000000000
-      internalID: 302641331129538988
+      spriteID: 0a61814558e98e7a0800000000000000
+      internalID: -6347649379300010336
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_3
+      name: SlimeAttack(2)_3
       rect:
         serializedVersion: 2
         x: 256
@@ -204,14 +205,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c42782d7716928a0800000000000000
-      internalID: -6329420634031446844
+      spriteID: 001e2330417a5ed20800000000000000
+      internalID: 3307233205768347904
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_4
+      name: SlimeAttack(2)_4
       rect:
         serializedVersion: 2
         x: 0
@@ -225,14 +226,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6b7a10f5a3be53f0800000000000000
-      internalID: -910092549403018386
+      spriteID: 163ef6f98f664c6f0800000000000000
+      internalID: -665293626931158175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_5
+      name: SlimeAttack(2)_5
       rect:
         serializedVersion: 2
         x: 256
@@ -246,14 +247,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1a3d96eb13031300800000000000000
-      internalID: 221524225039350300
+      spriteID: 751e16866d4befd10800000000000000
+      internalID: 2161363704151662935
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_6
+      name: SlimeAttack(2)_6
       rect:
         serializedVersion: 2
         x: 0
@@ -267,14 +268,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7a5d344074e8e110800000000000000
-      internalID: 1290532464073988732
+      spriteID: ac139e81388260c20800000000000000
+      internalID: 3172267531052855754
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_7
+      name: SlimeAttack(2)_7
       rect:
         serializedVersion: 2
         x: 256
@@ -288,8 +289,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7337cef53e295240800000000000000
-      internalID: 4780903288873104255
+      spriteID: 93b58767cf63051e0800000000000000
+      internalID: -2211206959091655879
       vertices: []
       indices: 
       edges: []
@@ -304,6 +305,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      SlimeAttack(2)_0: 1552828418339314068
+      SlimeAttack(2)_5: 2161363704151662935
+      SlimeAttack(2)_2: -6347649379300010336
+      SlimeAttack(2)_6: 3172267531052855754
+      SlimeAttack(2)_4: -665293626931158175
+      SlimeAttack(2)_1: 3130922437632738009
+      SlimeAttack(2)_7: -2211206959091655879
+      SlimeAttack(2)_3: 3307233205768347904
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

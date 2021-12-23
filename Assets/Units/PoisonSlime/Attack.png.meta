@@ -1,40 +1,43 @@
 fileFormatVersion: 2
-guid: 9b37fb24acf0a78469409eb3ead9308d
+guid: 50625d9a705d0c3458183ccdc05364b5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 780916083929509579
-    second: SlimePosionAttack_0
+      213: -6481605255533873518
+    second: SlimePosionAttack(1)_0
   - first:
-      213: 1262123918536652048
-    second: SlimePosionAttack_1
+      213: 228984693342237409
+    second: SlimePosionAttack(1)_1
   - first:
-      213: 1233222843932246578
-    second: SlimePosionAttack_2
+      213: -3060324600904555421
+    second: SlimePosionAttack(1)_2
   - first:
-      213: 6152926651512841832
-    second: SlimePosionAttack_3
+      213: -2538571896390352459
+    second: SlimePosionAttack(1)_3
   - first:
-      213: 1893549899901591819
-    second: SlimePosionAttack_4
+      213: 5063109524682833586
+    second: SlimePosionAttack(1)_4
   - first:
-      213: 9098872515810573012
-    second: SlimePosionAttack_5
+      213: 7814552016003560198
+    second: SlimePosionAttack(1)_5
   - first:
-      213: 3290049677326273147
-    second: SlimePosionAttack_6
+      213: -9097448713772017681
+    second: SlimePosionAttack(1)_6
   - first:
-      213: -8513124377926426324
-    second: SlimePosionAttack_7
+      213: 2049633351121203501
+    second: SlimePosionAttack(1)_7
   - first:
-      213: -6544266851784804151
-    second: SlimePosionAttack_8
+      213: -3359687195672003141
+    second: SlimePosionAttack(1)_8
   - first:
-      213: 4982289614840473325
-    second: SlimePosionAttack_9
+      213: -9029598796017846094
+    second: SlimePosionAttack(1)_9
   - first:
-      213: -7230135316389837035
-    second: SlimePosionAttack_10
+      213: -2479125003044942297
+    second: SlimePosionAttack(1)_10
+  - first:
+      213: 1139712158393509657
+    second: SlimePosionAttack(1)_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -57,6 +60,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -66,8 +70,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -98,7 +102,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
@@ -110,7 +114,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
@@ -122,7 +126,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
@@ -136,13 +140,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SlimePosionAttack_0
+      name: SlimePosionAttack(1)_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
-        width: 64
-        height: 32
+        y: 320
+        width: 256
+        height: 64
       alignment: 8
       pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +154,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bcee1067a0f56da00800000000000000
-      internalID: 780916083929509579
+      spriteID: 29639917c56bc06a0800000000000000
+      internalID: -6481605255533873518
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimePosionAttack_1
+      name: SlimePosionAttack(1)_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 96
-        width: 64
-        height: 32
+        x: 256
+        y: 320
+        width: 256
+        height: 64
       alignment: 8
       pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +175,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 015b6e25407f38110800000000000000
-      internalID: 1262123918536652048
+      spriteID: 1e27aa98d548d2300800000000000000
+      internalID: 228984693342237409
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimePosionAttack_2
+      name: SlimePosionAttack(1)_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 96
-        width: 64
-        height: 32
+        x: 0
+        y: 256
+        width: 256
+        height: 64
       alignment: 8
       pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,20 +196,125 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2328a7584a94d1110800000000000000
-      internalID: 1233222843932246578
+      spriteID: 364e1b16dfa8785d0800000000000000
+      internalID: -3060324600904555421
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimePosionAttack_3
+      name: SlimePosionAttack(1)_3
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 256
+        height: 64
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b10dd66f4e25ccd0800000000000000
+      internalID: -2538571896390352459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimePosionAttack(1)_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 256
+        height: 64
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2befd958947c34640800000000000000
+      internalID: 5063109524682833586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimePosionAttack(1)_5
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 256
+        height: 64
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60374b0c7add27c60800000000000000
+      internalID: 7814552016003560198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimePosionAttack(1)_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 256
+        height: 64
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe7d84d589e5fb180800000000000000
+      internalID: -9097448713772017681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimePosionAttack(1)_7
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 256
+        height: 64
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d217f556ca2c17c10800000000000000
+      internalID: 2049633351121203501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimePosionAttack(1)_8
       rect:
         serializedVersion: 2
         x: 0
         y: 64
-        width: 64
-        height: 32
+        width: 256
+        height: 64
       alignment: 8
       pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +322,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 866e470a036936550800000000000000
-      internalID: 6152926651512841832
+      spriteID: bbdba81cb4eff51d0800000000000000
+      internalID: -3359687195672003141
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimePosionAttack_4
+      name: SlimePosionAttack(1)_9
       rect:
         serializedVersion: 2
-        x: 64
+        x: 256
         y: 64
-        width: 64
-        height: 32
+        width: 256
+        height: 64
       alignment: 8
       pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,104 +343,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b016c1cf99d374a10800000000000000
-      internalID: 1893549899901591819
+      spriteID: 2b8bf036cbb60b280800000000000000
+      internalID: -9029598796017846094
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimePosionAttack_5
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 64
-        width: 64
-        height: 32
-      alignment: 8
-      pivot: {x: 1, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4da34716850b54e70800000000000000
-      internalID: 9098872515810573012
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimePosionAttack_6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 64
-        height: 32
-      alignment: 8
-      pivot: {x: 1, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b7acb6600ca98ad20800000000000000
-      internalID: 3290049677326273147
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimePosionAttack_7
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 64
-        height: 32
-      alignment: 8
-      pivot: {x: 1, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c212af49b7e4bd980800000000000000
-      internalID: -8513124377926426324
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimePosionAttack_8
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 32
-        width: 64
-        height: 32
-      alignment: 8
-      pivot: {x: 1, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9c8b008a8f71e25a0800000000000000
-      internalID: -6544266851784804151
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimePosionAttack_9
+      name: SlimePosionAttack(1)_10
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 32
+        width: 256
+        height: 64
       alignment: 8
       pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -339,20 +364,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de62fa4e106a42540800000000000000
-      internalID: 4982289614840473325
+      spriteID: 72e87b7d1f0689dd0800000000000000
+      internalID: -2479125003044942297
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimePosionAttack_10
+      name: SlimePosionAttack(1)_11
       rect:
         serializedVersion: 2
-        x: 64
+        x: 256
         y: 0
-        width: 64
-        height: 32
+        width: 256
+        height: 64
       alignment: 8
       pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -360,8 +385,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 517c3949c3669ab90800000000000000
-      internalID: -7230135316389837035
+      spriteID: 9172d3b6b2211df00800000000000000
+      internalID: 1139712158393509657
       vertices: []
       indices: 
       edges: []
@@ -376,6 +401,19 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      SlimePosionAttack(1)_0: -6481605255533873518
+      SlimePosionAttack(1)_5: 7814552016003560198
+      SlimePosionAttack(1)_3: -2538571896390352459
+      SlimePosionAttack(1)_1: 228984693342237409
+      SlimePosionAttack(1)_7: 2049633351121203501
+      SlimePosionAttack(1)_10: -2479125003044942297
+      SlimePosionAttack(1)_4: 5063109524682833586
+      SlimePosionAttack(1)_11: 1139712158393509657
+      SlimePosionAttack(1)_8: -3359687195672003141
+      SlimePosionAttack(1)_2: -3060324600904555421
+      SlimePosionAttack(1)_9: -9029598796017846094
+      SlimePosionAttack(1)_6: -9097448713772017681
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

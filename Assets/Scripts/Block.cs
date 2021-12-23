@@ -1,28 +1,37 @@
-using System.Linq;
+using System;
 using Unit;
 using UnitUI;
-using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Block : MonoBehaviour
 {
     private const int MAXHp = 6;
     private int _hp;
-    public Texture2D texture;
     private SpriteRenderer _spriteRenderer;
     public Sprite[] sprites;
-    private GameObject _wizard;
-    private Wizard.ManaType _type;
+    private Wizard _wizard;
+    private ManaType? _type;
     private const int TouchManaCount = 15;
-    private const int DestroyManaCount = 300;
+    private const int DestroyManaCount = 30;
+    private const float EmptyChance = 0.2f;
 
 
     private void Start()
     {
-        float rand = Random.Range(0, 3);
-            _type = (Wizard.ManaType) rand;
+        float emptyRand = Random.Range(0.0f, 1.0f);
+        if (emptyRand <= EmptyChance)
+        {
+            _type = null;
+        }
+        else
+        {
+            float rand = Random.Range(0, 3);
+            _type = (ManaType) rand;
+        }
+
         _hp = MAXHp;
-        _wizard = GameObject.FindWithTag("Wizard");
+        _wizard = GameObject.FindWithTag("Wizard").GetComponent<Wizard>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = sprites[MAXHp - _hp];
         gameObject.GetComponent<SpriteRenderer>().color = WizardUIListener.GetColor(_type);
@@ -34,16 +43,18 @@ public class Block : MonoBehaviour
         {
             collision.gameObject.GetComponent<Ball>().DamageAnimation();
             _hp--;
-            _spriteRenderer.sprite = sprites[MAXHp - _hp];
-            if (_hp == 0)
+            _spriteRenderer.sprite = sprites[Math.Max(MAXHp - _hp, 0)];
+            if (_type != null)
             {
-                _wizard.GetComponent<Wizard>().AddMana(_type, DestroyManaCount);
-                Destroy(gameObject);
+                _wizard.AddMana((ManaType) _type, _hp == 0 ? DestroyManaCount : TouchManaCount);
             }
-            else
+
+            if (_hp != 0) return;
+            if (_type != null)
             {
-                _wizard.GetComponent<Wizard>().AddMana(_type, TouchManaCount);
+                _wizard.GainExp(1);
             }
+            Destroy(gameObject);
         }
     }
 }

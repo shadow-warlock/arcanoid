@@ -1,35 +1,32 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Status
+public class StatusBehavior : MonoBehaviour
 {
-    public class StatusBehavior : MonoBehaviour
+    public IStatus Status
     {
-        public Status Status
+        get => _status;
+        set
         {
-            get { return _status; }
-            set
-            {
-                _status = value;
-                _status.OnDelete += OnStatusDelete;
-                _status.OnTick += OnStatusTick;
-                GetComponent<Image>().sprite = _status.Icon;
-            }
+            _status = value;
+            _status.OnDelete += OnStatusDelete;
+            _status.OnTick += OnStatusTick;
+            GetComponent<Image>().sprite = _status.Icon;
         }
-        private Status _status;
-        
-        private void OnStatusDelete()
-        {
-            transform.SetParent(null);
-            Destroy(gameObject);
-            _status.OnDelete -= OnStatusDelete;
-            _status.OnTick -= OnStatusTick;
-        }
+    }
+    private IStatus _status;
+    
+    private void OnStatusDelete()
+    {
+        _status.OnDelete -= OnStatusDelete;
+        _status.OnTick -= OnStatusTick;
+        transform.SetParent(null);
+        Destroy(gameObject);
 
-        private void OnStatusTick()
-        {
-            GetComponent<Image>().fillAmount = 1.0f - (float) Status.CurrentTime / Status.Time;
-        }
+    }
+
+    private void OnStatusTick(float progress)
+    {
+        GetComponent<Image>().fillAmount = 1 - progress;
     }
 }

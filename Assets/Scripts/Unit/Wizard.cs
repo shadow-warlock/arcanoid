@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
 using System.Linq;
-using Ability;
 using UnitData;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Unit
 {
@@ -16,13 +14,6 @@ namespace Unit
 
         public override int MAXHp => base.MAXHp + ShopStore.GetInstance().GetProductCount(ShopStore.Product.MaxHp) * 10;
 
-        public enum ManaType
-        {
-            Purple = 2,
-            Turquoise = 1,
-            Blue = 0
-        }
-
 
         public int MAXMana(int type)
         {
@@ -33,7 +24,8 @@ namespace Unit
         private int[] _levels = new int[3] {0, 0, 0};
         private int _exp = 0;
         private int[] _mana = new int[3] {0, 0, 0};
-        private Summon _summon;
+        public Summon Summon { get; set; }
+
         public ManaAbilityData[] abilities;
         public GameObject levelUpPanel;
         private GameObject _gameController;
@@ -51,6 +43,12 @@ namespace Unit
             _gameController = GameObject.FindWithTag("GameController");
         }
 
+        public void GainExp(int exp)
+        {
+            _exp += exp;
+            OnUpdateExpAndCoins(_exp, GetExpLevelUp(), _coins);
+        }
+
 
         private void UpdateMana(int index)
         {
@@ -65,20 +63,6 @@ namespace Unit
             UpdateMana(manaIndex);
         }
 
-        public void Summon(SummonAbilityData abilityData)
-        {
-            if (_summon != null)
-            {
-                _summon.Delete();
-            }
-
-            GameObject summon = Instantiate(abilityData.Summon.Prefab, summonSpawner.transform.position,
-                Quaternion.identity, summonSpawner.transform);
-            _summon = summon.GetComponent<Summon>();
-            _summon.owner = this;
-            _summon.Level = (int) (abilityData.Summon.BaseLevel * GetModificator(abilityData));
-            if (OnSummon != null) OnSummon(_summon);
-        }
 
         private bool HasMana(ManaType type, int count)
         {
@@ -105,7 +89,7 @@ namespace Unit
             return "Enemy";
         }
 
-        public override bool CanCast(Ability.AbilityData abilityData)
+        public override bool CanCast(AbilityData abilityData)
         {
             return abilityData switch
             {
@@ -115,7 +99,7 @@ namespace Unit
             };
         }
 
-        public override void PreCastDoing(Ability.AbilityData abilityData)
+        public override void PreCastDoing(AbilityData abilityData)
         {
             if (abilityData is ManaAbilityData manaAbility)
             {
@@ -123,14 +107,14 @@ namespace Unit
             }
         }
 
-        public override float GetModificator(Ability.AbilityData abilityData)
+        public override float GetModificator(ManaType? type)
         {
-            return abilityData switch
+            return type switch
             {
-                TimeAbilityData _ => 1 + 0.1f * GetLevel(),
-                SummonAbilityData summonAbility => 1 + 1 * _levels[(int) summonAbility.ManaType],
-                ManaAbilityData manaAbility => 1 + 0.05f * _levels[(int) manaAbility.ManaType],
-                _ => 1
+                ManaType.Blue => 1 + 0.1f * GetLevel() + 0.1f * _levels[(int) type],
+                ManaType.Turquoise => 1 + 0.1f * GetLevel() + 0.1f * _levels[(int) type],
+                ManaType.Purple => 1 + 0.1f * GetLevel() + 0.1f * _levels[(int) type],
+                _ => 1 + 0.1f * GetLevel()
             };
         }
 
@@ -151,6 +135,7 @@ namespace Unit
             }
         }
 
+
         public void StartLevelUp()
         {
             Time.timeScale = 0;
@@ -164,7 +149,7 @@ namespace Unit
             UpdateMana(type);
             OnUpdateExpAndCoins(_exp, GetExpLevelUp(), _coins);
             if (OnUpdate != null) OnUpdate();
-            TakeHeal((int) (MAXHp * 0.2f));
+            TakeHeal(this, (int) (MAXHp * 0.2f));
             Time.timeScale = 1;
             levelUpPanel.SetActive(false);
         }

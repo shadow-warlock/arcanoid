@@ -1,13 +1,12 @@
 using System.Collections;
 using UnitData;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Unit
 {
     public class Enemy : Unit
     {
-        private int Coins => (int) (3 * (1 + 0.05f * Level));
+        private int Coins => (int) (((EnemyData)data).Coins * (1 + 0.05f * Level));
         public int Level { get; set; } = 1;
         
         protected new void Start()
@@ -20,8 +19,8 @@ namespace Unit
         {
             Animator animator = GetComponent<Animator>();
             animator.SetTrigger("Die");
-            transform.parent.GetComponent<SpawnEnemy>().SpawnCoins(Coins);
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            transform.parent.GetComponent<SpawnEnemy>().SpawnCoins(Coins);
             Delete();
         }
 
@@ -39,7 +38,7 @@ namespace Unit
             return "Wizard";
         }
 
-        public override float GetModificator(Ability.AbilityData abilityData)
+        public override float GetModificator(ManaType? type)
         {
             return 1 + 0.05f * Level;
         }
@@ -49,12 +48,12 @@ namespace Unit
             return 1 + 0.05f * Level;
         }
 
-        public override bool CanCast(Ability.AbilityData abilityData)
+        public override bool CanCast(AbilityData abilityData)
         {
             return true;
         }
 
-        public override void PreCastDoing(Ability.AbilityData abilityData)
+        public override void PreCastDoing(AbilityData abilityData)
         {
         
         }

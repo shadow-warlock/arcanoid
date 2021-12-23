@@ -53,19 +53,15 @@ namespace UnitUI
             }
         }
         
-        public static Color GetColor(Wizard.ManaType type)
+        public static Color GetColor(ManaType? type)
         {
-            switch (type)
+            return type switch
             {
-                case Wizard.ManaType.Purple:
-                    return new Color(0.64f, 0.35f, 1f);
-                case Wizard.ManaType.Turquoise:
-                    return new Color(0.31f, 0.84f, 0.77f);
-                case Wizard.ManaType.Blue:
-                    return new Color(0.3f, 0.53f, 1f);
-            }
-
-            return new Color();
+                ManaType.Purple => new Color(0.64f, 0.35f, 1f),
+                ManaType.Turquoise => new Color(0.31f, 0.84f, 0.77f),
+                ManaType.Blue => new Color(0.3f, 0.53f, 1f),
+                _ => new Color(0.85f, 0.85f, 0.85f)
+            };
         }
     }
 }

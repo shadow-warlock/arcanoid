@@ -13,9 +13,16 @@ MonoBehaviour:
   m_Name: TestLevel
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 11400000, guid: fca712f3f1ddfe349b764d042186d6b5, type: 2}
   - {fileID: 11400000, guid: 5b930454bc2949149a9230155b6a7b90, type: 2}
+  - {fileID: 11400000, guid: 915ac3b6130801c4b921f25359368ed8, type: 2}
   - {fileID: 11400000, guid: fca712f3f1ddfe349b764d042186d6b5, type: 2}
-  levels: 01000000020000000a000000
-  increaseLevel: 0
-  multipleLevel: 2
+  - {fileID: 11400000, guid: 21d5a46f6b9768f448eef463e1e7e335, type: 2}
+  levels: 01000000020000000300000001000000
+  change:
+  - 1
+  - 1
+  - 1
+  - 0.1
+  spawnTime: 2
+  increaseLevel: 3
+  multipleLevel: 0
