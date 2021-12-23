@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
     private const float AccelerationTime = 2;
     private Vector2 _slowStartSpeed;
     private Rigidbody2D _rigidbody;
+    private ParticleSystem _particleTail;
 
     private enum State
     {
@@ -20,6 +21,7 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _particleTail = GetComponent<ParticleSystem>();
     }
     
     public void DamageAnimation()
@@ -47,6 +49,17 @@ public class Ball : MonoBehaviour
             _start = true;
             normalized = new Vector2(0, 1);
         }
+
+        ParticleSystem.ShapeModule particleTailShape = _particleTail.shape;
+        Vector3 rotation = particleTailShape.rotation;
+        float angle = Mathf.Rad2Deg * Mathf.Asin(-normalized.y);
+        if (normalized.x > 0)
+        {
+            angle = 180 - angle;
+        }
+
+        rotation.z = angle;
+        particleTailShape.rotation = rotation;
         _stateChangeDeltaTime += Time.deltaTime;
         _rigidbody.velocity = normalized * idealSpeed * (Math.Min(_stateChangeDeltaTime / AccelerationTime, 1));
     }
