@@ -128,11 +128,11 @@ namespace Unit
         public abstract float GetModificator(ManaType? type);
         protected abstract float GetMaxHpModificator();
     
-        public void TakeDamage(Unit damager, int damage)
+        public int TakeDamage(Unit damager, int damage)
         {
             if (IsDie)
             {
-                return;
+                return 0;
             }
 
             int realDamage = Math.Min(damage, Hp);
@@ -146,17 +146,20 @@ namespace Unit
                     StartCoroutine(Die());
                 }
             }
+
+            return realDamage;
         }
     
-        public void TakeHeal(Unit healer, int heal)
+        public int TakeHeal(Unit healer, int heal)
         {
             if (IsDie)
             {
-                return;
+                return 0;
             }
             int realHeal = Math.Min(MAXHp - Hp, heal);
             Hp += realHeal;
             OnDamage?.Invoke(healer, realHeal, true);
+            return realHeal;
         }
         
 
