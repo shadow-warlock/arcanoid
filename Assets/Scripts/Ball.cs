@@ -4,11 +4,9 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     private float _speed = 10.0f;
-    private float _minimalNormalizedY = 0.1f;
     private float _stateChangeDeltaTime = 0;
     private State state = State.Wait;
     private float _accelerationTime = 2;
-    private float _slowMotionSpeed = 0.5f;
     private Vector2 _slowStartSpeed;
     private Rigidbody2D _rigidbody;
 
@@ -21,7 +19,7 @@ public class Ball : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
-
+    
     public void DamageAnimation()
     {
         GetComponent<Animator>().SetTrigger("Damage");
@@ -31,7 +29,6 @@ public class Ball : MonoBehaviour
     {
         float idealSpeed = state switch
         {
-            State.Slow => _slowMotionSpeed,
             State.Run => _speed,
             _ => 0
         };
