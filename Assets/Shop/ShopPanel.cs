@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopPanel  : MonoBehaviour
+public class ShopPanel : MonoBehaviour
 {
     public Text levelIndicator;
     public Text cost;
@@ -11,6 +11,7 @@ public class ShopPanel  : MonoBehaviour
     public Button increaseLevel;
     public Image image;
     public ProductData data;
+
     private void Start()
     {
         int level = ShopStore.GetInstance().GetProductCount(data.Type);
@@ -30,7 +31,21 @@ public class ShopPanel  : MonoBehaviour
 
     private void UpdateUI(int level)
     {
-        levelIndicator.text = level.ToString();
+        string[] glyphs = {"ノ", "メ"};
+        string levelText = "";
+        if (level > 0)
+        {
+            int glyphType = level / 5;
+            Debug.Log(level);
+            Debug.Log(glyphType);
+            Debug.Log(level % 5);
+            for (int i = 0; i < (glyphType == 0 ? level % 5 : 5); i++)
+            {
+                levelText += i < level % 5 ? glyphs[glyphType] : glyphs[glyphType - 1];
+            }
+        }
+
+        levelIndicator.text = levelText;
         cost.text = data.CalculateCost(level).ToString();
         increaseLevel.enabled = data.CalculateCost(level) <= CoinsStore.GetInstance().GetCoinsCount();
     }

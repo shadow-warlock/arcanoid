@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Balls
   m_EditorClassIdentifier: 
   type: 0
-  cost: 2
-  costMultipleByLevel: 2
-  image: {fileID: 21300000, guid: 6b182688cab263e4ebfcdbae74be82c3, type: 3}
+  cost: 10
+  costMultipleByLevel: 5
+  image: {fileID: 21300000, guid: 9837aa416d6f52f41acd97072fe19b94, type: 3}
   name: "\u0421\u0432\u0435\u0442\u043B\u044F\u0447\u043A\u0438"
   description: "\u041F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0443\u0432\u0435\u043B\u0438\u0447\u0438\u0442\u044C
     \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0441\u0432\u0435\u0442\u043B\u044F\u0447\u043A\u043E\u0432
