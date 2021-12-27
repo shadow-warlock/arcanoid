@@ -15,7 +15,9 @@ public class Ball : MonoBehaviour
 
     private enum State
     {
-        Wait, Run, Slow
+        Wait,
+        Run,
+        Slow
     }
 
     private void Start()
@@ -23,7 +25,7 @@ public class Ball : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _particleTail = GetComponent<ParticleSystem>();
     }
-    
+
     public void DamageAnimation()
     {
         GetComponent<Animator>().SetTrigger("Damage");
@@ -84,5 +86,19 @@ public class Ball : MonoBehaviour
         state = State.Run;
         _stateChangeDeltaTime = 0;
         _rigidbody.velocity = _slowStartSpeed.normalized;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out Floor floor))
+        {
+            if (transform.parent.childCount == 1)
+            {
+                Platform platformScript = GameController.GetInstance().Platform;
+                platformScript.TakeDamage(1);
+            }
+            transform.SetParent(null);
+            Destroy(gameObject);
+        }
     }
 }

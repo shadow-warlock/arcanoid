@@ -10,6 +10,7 @@ namespace Unit
         public Action OnCreate;
         public Action OnDelete; 
         public Action<Unit, int, bool> OnDamage;
+        public Action<Unit> AfterDie;
         public Action  OnUpdate; 
         public Func<Unit, bool>  BeforeDie; 
         public Action<IStatus>  OnAddStatus;
@@ -144,6 +145,7 @@ namespace Unit
                 if (IsDie && this != null)
                 {
                     StartCoroutine(Die());
+                    AfterDie?.Invoke(damager);
                 }
             }
 

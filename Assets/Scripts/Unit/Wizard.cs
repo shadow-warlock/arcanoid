@@ -28,7 +28,6 @@ namespace Unit
 
         public ManaAbilityData[] abilities;
         public GameObject levelUpPanel;
-        private GameObject _gameController;
         public GameObject summonSpawner;
 
         protected new void Start()
@@ -40,12 +39,17 @@ namespace Unit
             }
 
             OnUpdateExpAndCoins(_exp, GetExpLevelUp(), _coins);
-            _gameController = GameObject.FindWithTag("GameController");
         }
 
         public void GainExp(int exp)
         {
             _exp += exp;
+            OnUpdateExpAndCoins(_exp, GetExpLevelUp(), _coins);
+        }
+        
+        public void GainCoins(int coins)
+        {
+            _coins += coins;
             OnUpdateExpAndCoins(_exp, GetExpLevelUp(), _coins);
         }
 
@@ -81,7 +85,6 @@ namespace Unit
         protected override IEnumerator Die()
         {
             yield return new WaitForSeconds(1f);
-            _gameController.GetComponent<GameController>().GameOver("Персонаж погиб");
         }
 
         public override string GetTargetType(bool summonExist)

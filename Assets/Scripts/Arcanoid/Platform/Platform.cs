@@ -8,19 +8,19 @@ public class Platform : MonoBehaviour
     private float _speed;
     private bool _leftWallTouch = false;
     private bool _rightWallTouch = false;
-    public GameObject hpBar;
-    protected int hp = 3;
-    public GameObject ballPrefab;
-    public GameObject ballContainer;
-    private GameObject _gameController;
-
+    private int hp = 3;
+    [SerializeField]
+    private GameObject hpBar;
+    [SerializeField]
+    private GameObject ballPrefab;
+    [SerializeField]
+    private GameObject ballContainer;
     private Vector2? moveDirection;
-
     private IController controller;
+    public Action  OnDie; 
 
     public int Hp => hp + ShopStore.GetInstance().GetProductCount(ShopStore.Product.Balls);
 
-    // Start is called before the first frame update
     private void Start()
     {
 #if UNITY_ANDROID
@@ -28,7 +28,6 @@ public class Platform : MonoBehaviour
 #else
         controller = new TouchController();
 #endif
-        _gameController = GameObject.FindWithTag("GameController");
         _speed = defaultSpeed;
         DrawHp();
         CreateBall();
@@ -46,7 +45,6 @@ public class Platform : MonoBehaviour
         ball.transform.SetParent(ballsStartContainer);
     }
 
-    // Update is called once per frame
     private void Update()
     {
         Vector2 direction = controller.Update(this);
@@ -85,7 +83,7 @@ public class Platform : MonoBehaviour
         DrawHp();
         if (Hp <= 0)
         {
-            _gameController.GetComponent<GameController>().GameOver("Закончились светлячки");
+            OnDie?.Invoke();
         }
         else
         {

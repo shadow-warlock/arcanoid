@@ -24,8 +24,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3209990251137197920}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.19935, y: 0.0031, z: 0}
+  m_LocalPosition: {x: -0.005, y: 0.0031, z: 0}
   m_LocalScale: {x: 0.125, y: 0.125, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5945979360650212942}
   m_RootOrder: 0
@@ -40,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5945979360650212942}
   - component: {fileID: 4800925295763794524}
-  - component: {fileID: 4800925295763794525}
   - component: {fileID: 5742527678591661030}
   - component: {fileID: 5856984367145466714}
   - component: {fileID: 5852723504345978374}
@@ -60,7 +60,8 @@ Transform:
   m_GameObject: {fileID: 6003550530086972937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.7, y: -3.29, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 1}
+  m_LocalScale: {x: 315.05902, y: 315.05902, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8658440228569796541}
   m_Father: {fileID: 0}
@@ -77,6 +78,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -117,25 +119,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &4800925295763794525
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6003550530086972937}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7678c19faae8c7649968a618c0662e30, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &5742527678591661030
 Rigidbody2D:
   serializedVersion: 4
@@ -155,7 +138,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!68 &5856984367145466714
 EdgeCollider2D:
@@ -173,12 +156,13 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.3160326, y: -0.007820457}
-  - {x: -0.20500427, y: -0.032876134}
-  - {x: -0.001017034, y: -0.0622921}
-  - {x: 0.21893954, y: -0.03290364}
-  - {x: 0.2730957, y: -0.02082315}
-  - {x: 0.3112439, y: -0.014377981}
+  - {x: -0.3146603, y: -0.17279157}
+  - {x: -0.2204299, y: -0.20489156}
+  - {x: -0.051457345, y: -0.18877858}
+  - {x: -0.00365597, y: -0.19048655}
+  - {x: 0.05094552, y: -0.18949711}
+  - {x: 0.22198594, y: -0.20740092}
+  - {x: 0.32121584, y: -0.16992864}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -195,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf77c9f04c664f744889aad6bef1a62f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSpeed: 6
+  defaultSpeed: 13
   hpBar: {fileID: 0}
-  hp: 3
   ballPrefab: {fileID: 7364177032060543800, guid: 98508e8bcc251114d85fcd94baf9796a, type: 3}
+  ballContainer: {fileID: 0}

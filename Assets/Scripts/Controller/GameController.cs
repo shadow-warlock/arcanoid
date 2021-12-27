@@ -15,6 +15,9 @@ public class GameController : MonoBehaviour
     private Wizard wizard;
     
     [SerializeField]
+    private Platform platform;
+    
+    [SerializeField]
     private SpawnEnemy enemySpawner;
     
     [SerializeField]
@@ -26,11 +29,30 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private SummonUIListener summonUIListener;
 
+    private static GameController _instance;
+    
+    public Wizard Wizard => wizard;
+
+    public Platform Platform => platform;
+
     private void Start()
     {
+        _instance = this;
         wizardUIListener.Unit = wizard;
+        wizard.AfterDie += unit => GameOver("Персонаж погиб");
+        platform.OnDie += () => GameOver("Закончились светлячки");
         enemySpawner.OnSpawn = OnEnemySpawn;
         wizard.OnSummon = OnSummon;
+    }
+
+    public static GameController GetInstance()
+    {
+        if (_instance == null)
+        {
+            throw new Exception("Game controller is null");
+        }
+
+        return _instance;
     }
 
     private void OnEnemySpawn(Enemy enemy)
@@ -49,7 +71,7 @@ public class GameController : MonoBehaviour
         SceneTransition.SwitchScene("Menu");
     }
     
-    public void GameOver(String text)
+    private void GameOver(String text)
     {
         Time.timeScale = 0;
         gameOverModal.SetActive(true);

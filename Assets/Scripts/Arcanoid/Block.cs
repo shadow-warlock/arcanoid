@@ -9,8 +9,8 @@ public class Block : MonoBehaviour
     private const int MAXHp = 6;
     private int _hp;
     private SpriteRenderer _spriteRenderer;
-    public Sprite[] sprites;
-    private Wizard _wizard;
+    [SerializeField]
+    private Sprite[] sprites;
     private ManaType? _type;
     private const int TouchManaCount = 15;
     private const int DestroyManaCount = 30;
@@ -33,7 +33,6 @@ public class Block : MonoBehaviour
         }
 
         _hp = MAXHp;
-        _wizard = GameObject.FindWithTag("Wizard").GetComponent<Wizard>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = sprites[MAXHp - _hp];
         gameObject.GetComponent<SpriteRenderer>().color = WizardUIListener.GetColor(_type);
@@ -41,9 +40,9 @@ public class Block : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ball"))
+        if (collision.gameObject.TryGetComponent(out Ball ball))
         {
-            collision.gameObject.GetComponent<Ball>().DamageAnimation();
+            ball.DamageAnimation();
             GameObject particle = Instantiate(_particlePrefab, transform.position, transform.rotation, transform.parent);
             ParticleSystem.MainModule main = particle.GetComponent<ParticleSystem>().main;
             main.startColor = WizardUIListener.GetColor(_type);
@@ -51,13 +50,13 @@ public class Block : MonoBehaviour
             _spriteRenderer.sprite = sprites[Math.Max(MAXHp - _hp, 0)];
             if (_type != null)
             {
-                _wizard.AddMana((ManaType) _type, _hp == 0 ? DestroyManaCount : TouchManaCount);
+                GameController.GetInstance().Wizard.AddMana((ManaType) _type, _hp == 0 ? DestroyManaCount : TouchManaCount);
             }
 
             if (_hp != 0) return;
             if (_type != null)
             {
-                _wizard.GainExp(1);
+                GameController.GetInstance().Wizard.GainExp(1);
             }
             Destroy(gameObject);
         }
