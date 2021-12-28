@@ -31,17 +31,15 @@ public class ShopPanel : MonoBehaviour
 
     private void UpdateUI(int level)
     {
-        string[] glyphs = {"ノ", "メ"};
+        const int glyphsOnLine = 5;
+        string[] glyphs = {"ノ", "メ", "#"};
         string levelText = "";
         if (level > 0)
         {
-            int glyphType = level / 5;
-            Debug.Log(level);
-            Debug.Log(glyphType);
-            Debug.Log(level % 5);
-            for (int i = 0; i < (glyphType == 0 ? level % 5 : 5); i++)
+            int glyphType = level / glyphsOnLine;
+            for (int i = 0; i < (glyphType == 0 ? level % glyphsOnLine : glyphsOnLine); i++)
             {
-                levelText += i < level % 5 ? glyphs[glyphType] : glyphs[glyphType - 1];
+                levelText += i < level % glyphsOnLine ? glyphs[glyphType] : glyphs[glyphType - 1];
             }
         }
 

@@ -12,12 +12,18 @@ namespace Unit
         public Action<int, float, bool> OnUpdateMana;
         public Action<int, int, int> OnUpdateExpAndCoins;
 
-        public override int MAXHp => base.MAXHp + ShopStore.GetInstance().GetProductCount(ShopStore.Product.MaxHp) * 10;
+        public override int MAXHp => base.MAXHp + ShopStore.GetInstance().GetProductCount(ShopStore.Product.MaxHp) * 50;
 
 
         public int MAXMana(int type)
         {
-            return (int) ((1 + _levels[type] * 0.05) * ((WizardData) data).MaxMana[type]);
+            ShopStore.Product[] shopUpgrades =
+            {
+                ShopStore.Product.MaxMana1,
+                ShopStore.Product.MaxMana2,
+                ShopStore.Product.MaxMana3,
+            };
+            return (int) ((1 + _levels[type] * 0.05) * ((WizardData) data).MaxMana[type]) + ShopStore.GetInstance().GetProductCount(shopUpgrades[type]) * 10;
         }
 
         private int _coins = 0;

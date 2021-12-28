@@ -8,7 +8,10 @@ public class ShopStore
     public enum Product
     {
         Balls,
-        MaxHp
+        MaxHp,
+        MaxMana1,
+        MaxMana2,
+        MaxMana3
     }
     
     

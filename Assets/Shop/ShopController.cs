@@ -17,7 +17,14 @@ public class ShopController : MonoBehaviour
         {
             {ShopPages.Arcanoid, new List<ShopStore.Product> {ShopStore.Product.Balls}},
             {ShopPages.Spells, new List<ShopStore.Product> { }},
-            {ShopPages.Hero, new List<ShopStore.Product> {ShopStore.Product.MaxHp}},
+            {
+                ShopPages.Hero,
+                new List<ShopStore.Product>
+                {
+                    ShopStore.Product.MaxHp, 
+                    ShopStore.Product.MaxMana1, ShopStore.Product.MaxMana2, ShopStore.Product.MaxMana3
+                }
+            },
         };
 
     [SerializeField] private List<ProductData> products;
@@ -44,12 +51,16 @@ public class ShopController : MonoBehaviour
 
     private void FillBook()
     {
-        foreach (Transform child in leftPage.transform) {
+        foreach (Transform child in leftPage.transform)
+        {
             Destroy(child.gameObject);
         }
-        foreach (Transform child in rightPage.transform) {
+
+        foreach (Transform child in rightPage.transform)
+        {
             Destroy(child.gameObject);
         }
+
         pages.TryGetValue(_openPage, out List<ShopStore.Product> productTypes);
         int i = 0;
         GameObject activePage = null;
@@ -69,7 +80,7 @@ public class ShopController : MonoBehaviour
 
             ShopPanel product = Instantiate(productPrefab, activePage.transform);
             product.data = data;
-            
+
             i++;
         }
 

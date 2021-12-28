@@ -602,6 +602,9 @@ MonoBehaviour:
   products:
   - {fileID: 11400000, guid: 0b480ce686d2c0e43bb85bf9e01e7e59, type: 2}
   - {fileID: 11400000, guid: ac4401fa0e43f3f4b9646b1a112708c5, type: 2}
+  - {fileID: 11400000, guid: c45a5db24c6f43443b2a2f061efeb9f1, type: 2}
+  - {fileID: 11400000, guid: 2860bd72e65a37a4eb47012f2b39d31e, type: 2}
+  - {fileID: 11400000, guid: 2e0fef5fde6e2d8439c0e8e3f7500e4d, type: 2}
   leftPage: {fileID: 51622849}
   rightPage: {fileID: 1524528139}
   productPrefab: {fileID: 1546152667582978499, guid: 7827a81125e5a644ab574103162cdf5c, type: 3}
